@@ -8,3 +8,8 @@ export interface Task {
     tracker?: {[key: string]: number};
     lastStatusChange: Date;
 }
+
+export interface TaskProps extends Task {
+    className?: string;
+    key: number;
+}

@@ -9,3 +9,7 @@ export interface Column {
     tasks: Array<Task>
     track: boolean;
 }
+
+export interface ColumnProps extends Column {
+    className?: string;
+}
