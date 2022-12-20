@@ -1,0 +1,23 @@
+.column {
+    min-width: 240px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.column__title {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    height: 36px;
+    color: var(--color-background);
+    background-color: var(--color-primary-dark);
+    border-radius: 2px;
+}
+
+.column__title h2 {
+    font-size: 1rem;
+}
+
+.column__tasks {
+    margin-top: 8px;
+}

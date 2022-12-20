@@ -1,3 +1,5 @@
+import { TimeTracker } from "./TimeTracker";
+
 export interface Task {
     id: string;
     title: string;
@@ -5,7 +7,7 @@ export interface Task {
     order: number;
     columnId: string;
     creationDate: Date;
-    tracker?: {[key: string]: number};
+    timeTracker: TimeTracker;
     lastStatusChange: Date;
 }
 

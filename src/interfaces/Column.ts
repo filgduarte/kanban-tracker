@@ -1,15 +1,15 @@
-import { Task } from './Task'
+import { Task } from './Task';
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 export interface Column {
     id: string;
     title: string;
     color?: string;
-    icon?: string;
+    icon?: IconProp;
     order: number;
-    tasks: Array<Task>
-    track: boolean;
 }
 
 export interface ColumnProps extends Column {
     className?: string;
+    tasks: Array<Task>
 }

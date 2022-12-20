@@ -1,3 +1,3 @@
 export interface TimeTracker {
-    [key: string]: number;
+    [key: string]: number; // [columnId] = seconds
 }

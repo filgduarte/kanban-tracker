@@ -1,0 +1,17 @@
+.header {
+    display: flex;
+    padding: 8px 8px 0;
+    height: 56px;
+    background-color: var(--color-primary-light);
+}
+
+.header .tab {
+    display: flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.125rem;
+    font-weight: bold;
+    background-color: var(--color-background);
+    border-radius: 2px 2px 0 0;
+}

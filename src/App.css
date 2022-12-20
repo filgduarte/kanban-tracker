@@ -1,41 +1,43 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
+:root {
+  --color-primary: hsl(184, 9%, 62%);
+  --color-primary-light: hsl(192, 15%, 94%);
+  --color-primary-dark: hsl(184, 6%, 53%);
+  --color-text: #000;
+  --color-background: #FFF;
+  --color-1: hsl(48, 89%, 50%);
+  --color-1-light: hsl(48, 89%, 95%);
+  --color-1-dark: hsl(48, 89%, 10%);
+  --color-2: hsl(145, 63%, 50%);
+  --color-2-light: hsl(145, 63%, 95%);
+  --color-2-dark: hsl(145, 63%, 10%);
+  --color-3: hsl(168, 76%, 42%);
+  --color-3-light: hsl(168, 76%, 95%);
+  --color-3-dark: hsl(168, 76%, 10%);
+  --color-4: hsl(204, 70%, 53%);
+  --color-4-light: hsl(204, 70%, 95%);
+  --color-4-dark: hsl(204, 70%, 10%);
+  --color-5: hsl(283, 39%, 53%);
+  --color-5-light: hsl(283, 39%, 95%);
+  --color-5-dark: hsl(283, 39%, 10%);
+  --color-6: hsl(6, 78%, 57%);
+  --color-6-light: hsl(6, 78%, 95%);
+  --color-6-dark: hsl(6, 78%, 10%);
+  --color-7: hsl(28, 80%, 52%);
+  --color-7-light: hsl(28, 80%, 95%);
+  --color-7-dark: hsl(28, 80%, 10%);
 }
 
-.read-the-docs {
-  color: #888;
+body {
+  background-color: var(--color-background);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1em;
+  color: var(--color-text);
 }
