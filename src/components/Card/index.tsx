@@ -1,7 +1,7 @@
-import { TaskProps } from '../../interfaces/Task';
+import { CardProps } from '../../interfaces/Card';
 import './style.css';
 
-export function Card(props: TaskProps) {
+export function Card(props: CardProps) {
     const openTask = (event: React.MouseEvent<HTMLElement>) => {
         
     }

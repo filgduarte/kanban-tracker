@@ -1,4 +1,6 @@
-import { Task } from './Task';
+import React from 'react';
+import { Card } from './Card';
+import { ModalProps } from './Modal';
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 export interface Column {
@@ -11,5 +13,6 @@ export interface Column {
 
 export interface ColumnProps extends Column {
     className?: string;
-    tasks: Array<Task>
+    children?: React.ReactNode;
+    onClick?: () => void;
 }

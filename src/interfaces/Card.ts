@@ -1,6 +1,6 @@
 import { TimeTracker } from "./TimeTracker";
 
-export interface Task {
+export interface Card {
     id: string;
     title: string;
     description?: string;
@@ -11,7 +11,8 @@ export interface Task {
     lastStatusChange: Date;
 }
 
-export interface TaskProps extends Task {
+export interface CardProps extends Card {
     className?: string;
     key: number;
+    onClick?: () => void;
 }

@@ -1,7 +1,7 @@
 import { Column } from './Column';
-import { Task } from './Task';
+import { Card } from './Card';
 
 export interface kanbanJSON {
     columns: Array<Column>;
-    tasks: Array<Task>;
+    cards: Array<Card>;
 }

@@ -12,27 +12,10 @@
   --color-primary-dark: hsl(184, 6%, 53%);
   --color-text: #000;
   --color-background: #FFF;
-  --color-1: hsl(48, 89%, 50%);
-  --color-1-light: hsl(48, 89%, 95%);
-  --color-1-dark: hsl(48, 89%, 10%);
-  --color-2: hsl(145, 63%, 50%);
-  --color-2-light: hsl(145, 63%, 95%);
-  --color-2-dark: hsl(145, 63%, 10%);
-  --color-3: hsl(168, 76%, 42%);
-  --color-3-light: hsl(168, 76%, 95%);
-  --color-3-dark: hsl(168, 76%, 10%);
-  --color-4: hsl(204, 70%, 53%);
-  --color-4-light: hsl(204, 70%, 95%);
-  --color-4-dark: hsl(204, 70%, 10%);
-  --color-5: hsl(283, 39%, 53%);
-  --color-5-light: hsl(283, 39%, 95%);
-  --color-5-dark: hsl(283, 39%, 10%);
-  --color-6: hsl(6, 78%, 57%);
-  --color-6-light: hsl(6, 78%, 95%);
-  --color-6-dark: hsl(6, 78%, 10%);
-  --color-7: hsl(28, 80%, 52%);
-  --color-7-light: hsl(28, 80%, 95%);
-  --color-7-dark: hsl(28, 80%, 10%);
+
+  --my-color: var(--color-primary);
+  --my-color-light: var(--color-primary-light);
+  --my-color-dark: var(--color-primary-dark);
 }
 
 body {
@@ -40,4 +23,46 @@ body {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1em;
   color: var(--color-text);
+}
+
+.color-1 {
+  --my-color: hsl(48, 89%, 50%);
+  --my-color-light: hsl(48, 89%, 95%);
+  --my-color-dark: hsl(48, 89%, 10%);
+}
+
+.color-2 {
+  --my-color: hsl(145, 63%, 50%);
+  --my-color-light: hsl(145, 63%, 95%);
+  --my-color-dark: hsl(145, 63%, 10%);
+}
+
+.color-3 {
+  --my-color: hsl(168, 76%, 42%);
+  --my-color-light: hsl(168, 76%, 95%);
+  --my-color-dark: hsl(168, 76%, 10%);
+}
+
+.color-4 {
+  --my-color: hsl(204, 70%, 53%);
+  --my-color-light: hsl(204, 70%, 95%);
+  --my-color-dark: hsl(204, 70%, 10%);
+}
+
+.color-5 {
+  --my-color: hsl(283, 39%, 53%);
+  --my-color-light: hsl(283, 39%, 95%);
+  --my-color-dark: hsl(283, 39%, 10%);
+}
+
+.color-6 {
+  --my-color: hsl(6, 78%, 57%);
+  --my-color-light: hsl(6, 78%, 95%);
+  --my-color-dark: hsl(6, 78%, 10%);
+}
+
+.color-7 {
+  --my-color: hsl(28, 80%, 52%);
+  --my-color-light: hsl(28, 80%, 95%);
+  --my-color-dark: hsl(28, 80%, 10%);
 }

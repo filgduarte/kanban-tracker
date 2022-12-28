@@ -6,11 +6,12 @@ const kanbanDefault:kanbanJSON = {
         {
             'id': nanoid(),
             'title': 'Tasks',
+            'color': 'color-1',
             'icon': 'inbox',
             'order': 1,
         }
     ],
-    'tasks': [],
+    'cards': [],
 }
 
 export function getKanbanData(key: string) {

@@ -1,5 +1,6 @@
 .card {
     padding: 8px;
+    min-height: 128px;
     background-color: var(--color-primary-light);
 }
 
