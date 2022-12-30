@@ -1,4 +1,4 @@
-import { CardProps } from '../../types';
+import { CardProps } from '../../interfaces/Card';
 import './style.css';
 
 export function Card(props: CardProps) {

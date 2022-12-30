@@ -1,4 +1,4 @@
-import { TimeTracker } from "../../types"
+import { TimeTracker } from "../../interfaces/TimeTracker"
 import './style.css';
 
 export function TimeTracker(props: TimeTracker) {

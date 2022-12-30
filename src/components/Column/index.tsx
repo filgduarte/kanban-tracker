@@ -1,10 +1,21 @@
+import { ColumnProps } from '../../interfaces/Column';
+import { FormColumn } from '../Form';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from '../../recoilState';
-import { FormColumn } from '../FormColumn';
-import { ColumnProps } from '../../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faInbox, faLayerGroup, faPause, faPlay, faTrashCan, faUserClock, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCheck,
+    faDownload,
+    faInbox,
+    faLayerGroup,
+    faPause,
+    faPlay,
+    faTimes,
+    faTrashCan,
+    faUserClock,
+    faPlus,
+} from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
 library.add(
@@ -15,6 +26,8 @@ library.add(
     faPlay,
     faTrashCan,
     faUserClock,
+    faDownload,
+    faTimes,
     faPlus,
 );
 

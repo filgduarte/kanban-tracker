@@ -1,8 +1,8 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { kanbanState, modalState } from '../../recoilState';
 import { Column } from '../Column';
 import { Card } from '../Card';
-import { FormColumn } from '../FormColumn';
+import { FormColumn } from '../Form';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { kanbanState, modalState } from '../../recoilState';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
