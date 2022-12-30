@@ -1,27 +1,39 @@
-import { ModalProps } from '../../interfaces/Modal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { useRecoilState } from 'recoil';
+import { modalState } from '../../recoilState';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import './style.css';
 
-export function Modal(props: ModalProps) {
+export function Modal() {
+    const [modal, setModal] = useRecoilState(modalState);
+    const closeModal = (event: React.MouseEvent<HTMLElement>) => {
+        setModal({
+            show: false,
+            title: '',
+        })
+    }
+
     let modalClass = 'modal';
-    if (props.show) {
+    if (modal.show) {
         modalClass += ' show';
     }
-    if (props.className) {
-        modalClass += ' ' + props.className
+    if (modal.className) {
+        modalClass += ' ' + modal.className
     }
 
     return (
         <div className={modalClass}>
-            <div className='modal__overlay'></div>
+            <div className='modal__overlay'>
+            </div>
+
             <div className='modal__box'>
-                <h2>{props.title}</h2>
-                <div className='modal__body'>
-                    {props.children}
-                </div>
-                <div className='modal__close-bt'>
+                <h2 className='modal__title'>{modal.title}</h2>
+                <div className='modal__content'>
+                {modal.children}
+                </div>                
+                <button className='modal__close-bt' onClick={closeModal}>
                     <FontAwesomeIcon icon={faTimes} />
-                </div>
+                </button>
             </div>
         </div>
     )

@@ -1,15 +1,29 @@
-import { KanbanProps } from '../../interfaces/KanbanBoard';
 import { Column } from '../Column';
 import { Card } from '../Card';
-
+import { FormColumn } from '../Form';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { kanbanState, modalState } from '../../recoilState';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
-export function KanbanBoard(props: KanbanProps) {
+export function KanbanBoard() {
+    const kanban = useRecoilValue(kanbanState);
+
+    const setModal = useSetRecoilState(modalState);
+    const openColumnModal = (event: React.MouseEvent<HTMLElement>) => {
+        setModal({
+            show: true,
+            title: 'Inserir coluna',
+            children: <FormColumn />,
+        })
+    }
+
     return(
         <main>
             <div className="kanban-board">
             {
-                props.columns.map((column, index) => (
+                kanban.columns.map((column, index) => (
                     <Column id={column.id}
                             title={column.title}
                             order={column.order}
@@ -18,7 +32,7 @@ export function KanbanBoard(props: KanbanProps) {
                             key={index}
                     >
                     {
-                        props.cards.filter(card => card.columnId == column.id)
+                        kanban.cards.filter(card => card.columnId == column.id)
                                     .map((card, index) => (
                             <Card id={card.id}
                                   title={card.title}
@@ -34,6 +48,16 @@ export function KanbanBoard(props: KanbanProps) {
                     }
                     </Column>
                 ))
+            }
+            {
+                (kanban.columns.length <= 7) &&
+                <div className={`column`}>
+                    <div className='add-column'>
+                        <button onClick={(openColumnModal)}>
+                            <FontAwesomeIcon icon={faPlus} />
+                        </button>
+                    </div>
+                </div>
             }
             </div>
         </main>

@@ -1,0 +1,108 @@
+.form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    min-width: 350px;
+    max-width: 470px;
+}
+
+.form-field {
+    width: calc(50% - 12px);
+}
+
+.form-field.full-width {
+    width: 100%;
+}
+
+.form-field label,
+.form-field legend {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-primary);
+}
+
+.form-field input {
+    width: 100%;
+    padding: 8px;
+    background: var(--color-primary-light);
+    border: none;
+    border-radius: 2px;
+}
+
+fieldset {
+    display: flex;
+    border: none;
+    padding: 0;
+}
+
+.form-field .input-icon label,
+.form-field .input-color label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    color: var(--color-text);
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.form-field .input-icon:has(:checked) label,
+.form-field .input-color:has(:checked) label {
+    background-color: var(--color-primary-light);
+}
+
+.form-field .input-icon input,
+.form-field .input-color input {
+    display: none;
+}
+
+.form-field .input-color label {
+    position: relative;
+    color: transparent;
+}
+
+.form-field .input-color label::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 8px);
+    left: calc(50% - 8px);
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: var(--my-color);
+    border-radius: 50%;
+}
+
+.action-button {
+    padding: 9px 9px 12px;
+    font-weight: bold;
+    color: var(--color-background);
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 2px;
+    box-shadow: inset 0 -3px 0 rgba(0,0,0,.2);
+    cursor: pointer;
+    transition: background-color 150ms ease;
+}
+
+.action-button svg {
+    margin-right: 8px;
+}
+
+.action-button + .action-button {
+    margin-left: 8px;
+}
+
+.action-button:hover {
+    background-color: var(--my-color);
+}
+
+.action-button:active {
+    padding: 9px;
+    box-shadow: inset 0 3px 0 rgba(0,0,0,.2);
+    transform: translateY(3px);
+}

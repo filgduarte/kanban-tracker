@@ -1,0 +1,79 @@
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    visibility: hidden;
+    pointer-events: none;
+    backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
+    transition: backdrop-filter 300ms linear,
+                -webkit-backdrop-filter 300ms linear;
+}
+
+.modal.show {
+    visibility: visible;
+    pointer-events: auto;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.modal__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-primary-light);
+    opacity: 0;
+    transition: opacity 300ms linear;
+}
+
+.modal.show .modal__overlay {
+    opacity: .75;
+}
+
+.modal__box {
+    position: relative;
+    background-color: var(--color-background);
+    border-radius: 2px;
+}
+
+.modal__title {
+    padding: 8px 10px 6px;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1;
+    color: var(--color-primary-dark);
+    border-bottom: 1px solid var(--color-primary-light);
+}
+
+.modal__content {
+    padding: 24px;
+}
+
+.modal__close-bt {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 28px;
+    height: 28px;
+    color: var(--color-primary-dark);
+    background-color: transparent;
+    background-image: radial-gradient(var(--color-primary-dark) 50%, transparent 55%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0 0;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: color 150ms ease,
+                background-size 150ms ease;
+}
+
+.modal__close-bt:hover {
+    color: var(--color-background);
+    background-size: 200% 200%;
+}

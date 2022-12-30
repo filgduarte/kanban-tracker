@@ -2,7 +2,7 @@ import React from "react";
 
 export interface ModalProps {
     show: boolean;
-    name: string;
+    title: string;
     children?: React.ReactNode;
     className?: string;
 }

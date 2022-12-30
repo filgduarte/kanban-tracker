@@ -18,11 +18,16 @@
   --my-color-dark: var(--color-primary-dark);
 }
 
-body {
-  background-color: var(--color-background);
+html,
+input,
+button {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1em;
   color: var(--color-text);
+}
+
+body {
+  background-color: var(--color-background);
 }
 
 .color-1 {
@@ -65,4 +70,16 @@ body {
   --my-color: hsl(28, 80%, 52%);
   --my-color-light: hsl(28, 80%, 95%);
   --my-color-dark: hsl(28, 80%, 10%);
+}
+
+.danger {
+  --my-color: #c0392b;
+}
+
+.warning {
+  --my-color: #f39c12;
+}
+
+.success {
+  --my-color: #27ae60;
 }

@@ -14,5 +14,4 @@ export interface Column {
 export interface ColumnProps extends Column {
     className?: string;
     children?: React.ReactNode;
-    onClick?: () => void;
 }
