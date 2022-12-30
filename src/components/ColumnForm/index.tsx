@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { kanbanState, modalState } from '../../recoilState';
 import { nanoid } from 'nanoid';
-import { Column } from '../../interfaces/Column';
-import { kanbanJSON } from '../../interfaces/kanbanJSON';
-import { FormColumnProps, FormCardProps } from '../../interfaces/Form';
+import { Column, kanbanData, FormColumnProps, FormCardProps } from '../../types';
 import { setKanbanData } from '../../kanbanDataHandler';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -71,7 +69,7 @@ export function FormColumn(props: FormColumnProps) {
         })
     }
 
-    function saveAndCloseModal(newKanban: kanbanJSON) {
+    function saveAndCloseModal(newKanban: kanbanData) {
         setKanban(newKanban);
         setKanbanData('kanbanTracker', newKanban);
         setModal({
@@ -100,7 +98,7 @@ export function FormColumn(props: FormColumnProps) {
     const saveColumn = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         const index = kanban.columns.findIndex((column) => column.id == props.column?.id);
-        let newKanban: kanbanJSON = {
+        let newKanban: kanbanData = {
             columns: [],
             cards: kanban.cards,
         }

@@ -1,5 +1,5 @@
-import { ColumnProps } from '../../interfaces/Column';
-import { FormColumn } from '../Form';
+import { ColumnProps } from '../../types';
+import { FormColumn } from '../ColumnForm';
 import { useSetRecoilState } from 'recoil';
 import { modalState } from '../../recoilState';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

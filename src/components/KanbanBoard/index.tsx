@@ -1,6 +1,6 @@
 import { Column } from '../Column';
 import { Card } from '../Card';
-import { FormColumn } from '../Form';
+import { FormColumn } from '../ColumnForm';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { kanbanState, modalState } from '../../recoilState';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

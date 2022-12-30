@@ -1,7 +1,7 @@
-import { kanbanJSON } from "./interfaces/kanbanJSON";
+import { kanbanData } from "./types";
 import { nanoid } from "nanoid";
 
-const kanbanDefault:kanbanJSON = {
+const kanbanDefault:kanbanData = {
     'columns': [
         {
             'id': nanoid(),
@@ -26,7 +26,7 @@ export function getKanbanData(key: string) {
     }
 }
 
-export function setKanbanData(key: string, value: kanbanJSON) {
+export function setKanbanData(key: string, value: kanbanData) {
     if (key) {
         localStorage.setItem(key, JSON.stringify(value));
     }
