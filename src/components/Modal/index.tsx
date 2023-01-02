@@ -6,12 +6,6 @@ import './style.css';
 
 export function Modal() {
     const [modal, setModal] = useRecoilState(modalState);
-    const closeModal = (event: React.MouseEvent<HTMLElement>) => {
-        setModal({
-            show: false,
-            title: '',
-        })
-    }
 
     let modalClass = 'modal';
     if (modal.show) {
@@ -31,7 +25,7 @@ export function Modal() {
                 <div className='modal__content'>
                 {modal.children}
                 </div>                
-                <button className='modal__close-bt' onClick={closeModal}>
+                <button className='modal__close-bt' onClick={e => setModal({show: false})}>
                     <FontAwesomeIcon icon={faTimes} />
                 </button>
             </div>

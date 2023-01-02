@@ -1,10 +1,10 @@
 import { atom } from 'recoil';
-import { ModalProps, kanbanData } from './types';
-import { getKanbanData, setKanbanData } from './kanbanDataHandler';
+import { ModalProps, KanbanData } from './types';
+import { getKanbanData } from './kanbanDataHandler';
 
 export const kanbanState = atom({
     key: 'kanbanState',
-    default: getKanbanData('kanbanTracker') as kanbanData
+    default: getKanbanData() as KanbanData
 });
 
 export const modalState = atom({

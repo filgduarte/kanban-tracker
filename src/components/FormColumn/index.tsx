@@ -2,22 +2,12 @@ import React, { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { kanbanState, modalState } from '../../recoilState';
 import { nanoid } from 'nanoid';
-import { Column, kanbanData, FormColumnProps, FormCardProps } from '../../types';
+import { Column, KanbanData, FormColumnProps, FormCardProps } from '../../types';
 import { setKanbanData } from '../../kanbanDataHandler';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faCheck,
-    faDownload,
-    faInbox,
-    faLayerGroup,
-    faPause,
-    faPlay,
-    faTimes,
-    faTrashCan,
-    faUserClock,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faDownload, faInbox, faLayerGroup, faPause, faPlay, faTimes, faTrashCan, faUserClock } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
 library.add(
@@ -55,33 +45,23 @@ export function FormColumn(props: FormColumnProps) {
         'color-7',
     ];
 
-    const [title, setTitle] = useState(props.column ? props.column.title : '');
-    const [icon, setIcon] = useState(props.column ? props.column.icon : iconOptions[0]);
-    const [color, setColor] = useState(props.column ? props.column.color : colorOptions[0]);
-    const [order, setOrder] = useState(props.column ? props.column.order : 1);
-    const [kanban, setKanban] = useRecoilState(kanbanState);
+    const [titleInput, setTitleInput] = useState(props.column ? props.column.title : '');
+    const [iconInput, setIconInput] = useState(props.column ? props.column.icon : iconOptions[0]);
+    const [colorInput, setColorInput] = useState(props.column ? props.column.color : colorOptions[0]);
+    const [orderInput, setOrderInput] = useState(props.column ? props.column.order : 1);
+    const [kanban, setKanbanState] = useRecoilState(kanbanState);
     const setModal = useSetRecoilState(modalState);
 
-    function closeModal(event: React.MouseEvent<HTMLButtonElement>) {
-        setModal({
-            show: false,
-            title: '',
-        })
-    }
-
-    function saveAndCloseModal(newKanban: kanbanData) {
-        setKanban(newKanban);
-        setKanbanData('kanbanTracker', newKanban);
-        setModal({
-            show: false,
-            title: '',
-        })
+    function saveAndCloseModal(newKanban: KanbanData) {
+        setKanbanState(newKanban);
+        setKanbanData(newKanban);
+        setModal({show: false})
     }
 
     const removeColumn = (event: React.MouseEvent<HTMLElement>) => {
         const index = kanban.columns.findIndex((column) => column.id == props.column?.id);
         if (index < 0) {
-            alert('Não foi possível encontrar o id da coluna');
+            alert('Não foi possível encontrar o id da coluna.');
             return
         };
 
@@ -98,7 +78,7 @@ export function FormColumn(props: FormColumnProps) {
     const saveColumn = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         const index = kanban.columns.findIndex((column) => column.id == props.column?.id);
-        let newKanban: kanbanData = {
+        let newKanban: KanbanData = {
             columns: [],
             cards: kanban.cards,
         }
@@ -106,10 +86,10 @@ export function FormColumn(props: FormColumnProps) {
         if (index < 0) {
             const newColumn: Column = {
                 id: nanoid(),
-                title: title,
-                color: color,
-                icon: icon,
-                order: order,
+                title: titleInput,
+                color: colorInput,
+                icon: iconInput,
+                order: orderInput,
             }
 
             newKanban.columns = [
@@ -124,10 +104,10 @@ export function FormColumn(props: FormColumnProps) {
 
             const columnToUpdate: Column = {
                 id: kanban.columns[index].id,
-                title: title,
-                color: color,
-                icon: icon,
-                order: order,
+                title: titleInput,
+                color: colorInput,
+                icon: iconInput,
+                order: orderInput,
             }
 
             newKanban.columns = [
@@ -142,7 +122,7 @@ export function FormColumn(props: FormColumnProps) {
 
     const discardChanges = (event: React.MouseEvent<HTMLButtonElement>) => {
         if (confirm('Tem certeza de que quer descartar as alterações?')) {
-            closeModal(event);
+            setModal({show: false});
         }
     }
 
@@ -150,7 +130,7 @@ export function FormColumn(props: FormColumnProps) {
         <form className={'form ' + (props.className ?? '')}>
             <div className='form-field full-width'>
                 <label htmlFor='title'>Título:</label>
-                <input type='text' id='title' value={title} onChange={e => setTitle(e.target.value)} />
+                <input type='text' id='title' value={titleInput} onChange={e => setTitleInput(e.target.value)} />
             </div>
             <div className='form-field'>
                 <fieldset>
@@ -161,7 +141,7 @@ export function FormColumn(props: FormColumnProps) {
                                 <label htmlFor={`icon-${index}`}>
                                     <FontAwesomeIcon icon={currentIcon} />
                                 </label>
-                                <input type='radio' id={`icon-${index}`} name='icon' value={currentIcon.toString()} checked={icon == currentIcon} onChange={e => setIcon(currentIcon)} />
+                                <input type='radio' id={`icon-${index}`} name='icon' value={currentIcon.toString()} checked={iconInput == currentIcon} onChange={e => setIconInput(currentIcon)} />
                             </div>
                         ))
                     }
@@ -176,7 +156,7 @@ export function FormColumn(props: FormColumnProps) {
                                 <label htmlFor={currentColor} className={currentColor}>
                                     {currentColor}
                                 </label>
-                                <input type='radio' id={currentColor} name='color' value={currentColor} checked={color == currentColor} key={index} onChange={e => setColor(e.target.value)}></input>
+                                <input type='radio' id={currentColor} name='color' value={currentColor} checked={colorInput == currentColor} key={index} onChange={e => setColorInput(e.target.value)}></input>
                             </div>
                         ))
                     }
@@ -184,7 +164,7 @@ export function FormColumn(props: FormColumnProps) {
             </div>
             <div className='form-field full-width'>
                 <label htmlFor='order'>Ordem:</label>
-                <input id='order' type='number' value={order} onChange={e => setOrder(parseInt(e.target.value))}></input>
+                <input id='order' type='number' value={orderInput} onChange={e => setOrderInput(parseInt(e.target.value))}></input>
             </div>
             <div className='form-field full-width'>
                 {

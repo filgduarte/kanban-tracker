@@ -1,6 +1,6 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
-export interface kanbanData {
+export interface KanbanData {
     columns: Array<Column>;
     cards: Array<Card>;
 }
@@ -19,9 +19,9 @@ export interface Card {
     description?: string;
     order: number;
     columnId: string;
-    creationDate: Date;
+    creationDate: number;
     timeTracker: TimeTracker;
-    lastStatusChange: Date;
+    lastChange: number;
 }
 
 export interface CardProps extends Card {
@@ -39,19 +39,24 @@ export interface TimeTracker {
     [key: string]: number; // [columnId] = seconds
 }
 
+export interface TimeTrackerProps {
+    trackers: TimeTracker;
+}
+
 export interface FormColumnProps {
     column?: Column | undefined;
     className?: string;
 }
 
 export interface FormCardProps {
+    columnId: string;
     card?: Card | undefined;
     className?: string;
 }
 
 export interface ModalProps {
     show: boolean;
-    title: string;
+    title?: string;
     children?: React.ReactNode;
     className?: string;
 }

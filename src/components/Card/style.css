@@ -1,9 +1,71 @@
 .card {
-    padding: 8px;
-    min-height: 128px;
-    background-color: var(--color-primary-light);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 8px;
+    padding: 4px;
+    background-color: var(--my-color-light);
+    border-radius: 2px;
 }
 
-.card h3 {
+.card .card-content {
+    background-color: transparent;
+    mix-blend-mode: multiply;
+    cursor: pointer;
+    transition: background-color 300ms ease;
+}
+
+.card .card-content:hover {
+    background-color: var(--my-color-light);
+}
+
+.card .card-title {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card .card-title h3 {
+    position: relative;
     font-size: 1rem;
+}
+
+.card .card-title svg {
+    position: relative;
+    color: transparent;
+    transition: color 300ms ease;
+}
+
+.card .card-content:hover svg {
+    color: var(--my-color);
+}
+
+.card .card-content {
+    padding: 4px;
+}
+
+.card .card-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin: 4px 4px 8px;
+}
+
+.card .action-button {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    font-size: 0.875rem;
+    background-color: var(--my-color);
+    box-shadow: 0 3px 0 rgba(0,0,0,.2),
+              0 3px 0 var(--my-color);
+}
+
+.card .action-button + .action-button {
+    margin-left: 4px;
+}
+
+.card .action-button svg {
+    margin: 0 auto;
 }

@@ -1,6 +1,6 @@
 import { Column } from '../Column';
 import { Card } from '../Card';
-import { FormColumn } from '../ColumnForm';
+import { FormColumn } from '../FormColumn';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { kanbanState, modalState } from '../../recoilState';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +11,8 @@ export function KanbanBoard() {
     const kanban = useRecoilValue(kanbanState);
 
     const setModal = useSetRecoilState(modalState);
-    const openColumnModal = (event: React.MouseEvent<HTMLElement>) => {
+    
+    function openColumnModal(event: React.MouseEvent<HTMLElement>) {
         setModal({
             show: true,
             title: 'Inserir coluna',
@@ -41,7 +42,7 @@ export function KanbanBoard() {
                                   columnId={card.columnId}
                                   creationDate={card.creationDate}
                                   timeTracker={card.timeTracker}
-                                  lastStatusChange={card.lastStatusChange}
+                                  lastChange={card.lastChange}
                                   key={index}
                             />
                         ))
