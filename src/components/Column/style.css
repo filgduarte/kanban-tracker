@@ -2,6 +2,7 @@
     min-width: 240px;
     max-width: 400px;
     width: 100%;
+    order: 8;
 }
 
 .column__header {

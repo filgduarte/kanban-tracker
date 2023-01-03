@@ -29,6 +29,7 @@
 html,
 input,
 textarea,
+select,
 button {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1em;

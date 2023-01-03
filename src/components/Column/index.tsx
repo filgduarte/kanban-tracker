@@ -52,8 +52,8 @@ export function Column(props: ColumnProps) {
     const columnIcon = props.icon ?? 'layer-group';
 
     return(
-        <div className={columnClass}>
-            <div className='column__header' onClick={openColumnModal} title={`Editar coluna "${props.title}"`}>
+        <div className={columnClass} style={{order: props.order}}>
+            <div className='column__header' onClick={openColumnModal} title={`Editar coluna '${props.title}'`}>
                 <div className='column__title'>
                     <h2>
                         <span className='icon'><FontAwesomeIcon icon={columnIcon} /></span>

@@ -1,15 +1,17 @@
-import { KanbanData } from "./types";
-import { nanoid } from "nanoid";
+import { KanbanData, Card } from './types';
+import { nanoid } from 'nanoid';
 
-const LOCAL_STORAGE_DEFAULT_KEY = 'kanbanTracker';
+export const LOCAL_STORAGE_DEFAULT_KEY = 'kanbanTracker';
+export const LOCAL_STORAGE_ARCHIVE_KEY = 'kanbanArchive';
 const LOCAL_STORAGE_DEFAULT_VALUE:KanbanData = {
     'columns': [
         {
-            'id': nanoid(),
-            'title': 'Tasks',
-            'color': 'color-1',
-            'icon': 'inbox',
-            'order': 1,
+            id: nanoid(),
+            title: 'Tasks',
+            color: 'color-1',
+            icon: 'inbox',
+            order: 1,
+            archiveAfter: 0,
         }
     ],
     'cards': [],
@@ -29,7 +31,7 @@ export function getKanbanData(key?: string) {
     }
 }
 
-export function setKanbanData(value: KanbanData, key?: string) {
+export function setKanbanData(value: KanbanData | Array<Card>, key?: string) {
     if ( !key ) key = LOCAL_STORAGE_DEFAULT_KEY;
 
     if ( value ) {
@@ -37,7 +39,7 @@ export function setKanbanData(value: KanbanData, key?: string) {
             localStorage.setItem(key, JSON.stringify(value));
         }
         catch(error) {
-            console.log("Houve um erro ao salvar os dados: " + error);
+            console.log('Houve um erro ao salvar os dados: ' + error);
         }
     }
 }

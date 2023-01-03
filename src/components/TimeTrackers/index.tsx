@@ -100,10 +100,10 @@ export function TimeTrackers(props: TimeTrackerProps) {
                     </h2>
                 </div>
                 <div className='time-tracker__counter'>
-                    <span className="time-tracker__days">{formatedTime.days}</span>:
-                    <span className="time-tracker__hours">{formatedTime.hours}</span>:
-                    <span className="time-tracker__minutes">{formatedTime.minutes}</span>:
-                    <span className="time-tracker__seconds">{formatedTime.seconds}</span>
+                    <span className='time-tracker__days'>{formatedTime.days}</span>:
+                    <span className='time-tracker__hours'>{formatedTime.hours}</span>:
+                    <span className='time-tracker__minutes'>{formatedTime.minutes}</span>:
+                    <span className='time-tracker__seconds'>{formatedTime.seconds}</span>
                 </div>
             </div>
         )
@@ -135,10 +135,10 @@ export function TimeTrackers(props: TimeTrackerProps) {
             <div className='donut-chart' ref={ref} style={{backgroundImage: cssGradient, minHeight: chartWidth}}>
                 <h4>Tempo total:</h4>
                 <div className='time-tracker__counter'>
-                    <span className="time-tracker__days">{formatedTime.days}</span>:
-                    <span className="time-tracker__hours">{formatedTime.hours}</span>:
-                    <span className="time-tracker__minutes">{formatedTime.minutes}</span>:
-                    <span className="time-tracker__seconds">{formatedTime.seconds}</span>
+                    <span className='time-tracker__days'>{formatedTime.days}</span>:
+                    <span className='time-tracker__hours'>{formatedTime.hours}</span>:
+                    <span className='time-tracker__minutes'>{formatedTime.minutes}</span>:
+                    <span className='time-tracker__seconds'>{formatedTime.seconds}</span>
                 </div>
             </div>
         );

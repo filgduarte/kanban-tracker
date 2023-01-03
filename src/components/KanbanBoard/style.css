@@ -2,6 +2,9 @@
     display: flex;
     gap: 24px;
     padding: 24px;
+    max-width: 100vw;
+    height: calc(100vh - 56px);
+    overflow: auto;
 }
 
 .add-column {

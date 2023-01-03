@@ -22,9 +22,11 @@
     color: var(--color-primary);
 }
 
-.form-field input {
+.form-field input,
+.form-field select {
     width: 100%;
-    padding: 8px;
+    height: 36px;
+    padding: 0 8px;
     background: var(--color-primary-light);
     border: none;
     border-radius: 2px;

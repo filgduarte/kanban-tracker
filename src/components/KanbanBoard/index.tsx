@@ -21,7 +21,7 @@ export function KanbanBoard() {
 
     return(
         <main>
-            <div className="kanban-board">
+            <div className='kanban-board'>
             {
                 kanban.columns.map((column, index) => (
                     <Column id={column.id}
@@ -29,6 +29,7 @@ export function KanbanBoard() {
                             order={column.order}
                             color={column.color}
                             icon={column.icon}
+                            archiveAfter={column.archiveAfter}
                             key={index}
                     >
                     {
@@ -51,7 +52,7 @@ export function KanbanBoard() {
             }
             {
                 (kanban.columns.length <= 7) &&
-                <div className={`column`}>
+                <div className='column'>
                     <div className='add-column'>
                         <button onClick={(openColumnModal)}>
                             <FontAwesomeIcon icon={faPlus} />

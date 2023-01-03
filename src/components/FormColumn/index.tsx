@@ -43,12 +43,21 @@ export function FormColumn(props: FormColumnProps) {
         'color-7',
     ];
 
+    const archiveOptions = {
+        'Não': 0,
+        'Após 1 dia': 1440,
+        'Após 1 semana': 10080,
+        'Após 1 mês': 43200,
+    }
+
+    const [kanban, setKanbanState] = useRecoilState(kanbanState);
+    const setModal = useSetRecoilState(modalState);
+
     const [titleInput, setTitleInput] = useState(props.column ? props.column.title : '');
     const [iconInput, setIconInput] = useState(props.column ? props.column.icon : iconOptions[0]);
     const [colorInput, setColorInput] = useState(props.column ? props.column.color : colorOptions[0]);
-    const [orderInput, setOrderInput] = useState(props.column ? props.column.order : 1);
-    const [kanban, setKanbanState] = useRecoilState(kanbanState);
-    const setModal = useSetRecoilState(modalState);
+    const [orderInput, setOrderInput] = useState(props.column ? props.column.order : (kanban.columns.length + 1));
+    const [archiveInput, setArchiveInput] = useState(props.column ? props.column.archiveAfter : archiveOptions['Não']);
 
     function saveAndCloseModal(newKanban: KanbanData) {
         setKanbanState(newKanban);
@@ -88,6 +97,7 @@ export function FormColumn(props: FormColumnProps) {
                 color: colorInput,
                 icon: iconInput,
                 order: orderInput,
+                archiveAfter: 0,
             }
 
             newKanban.columns = [
@@ -106,6 +116,7 @@ export function FormColumn(props: FormColumnProps) {
                 color: colorInput,
                 icon: iconInput,
                 order: orderInput,
+                archiveAfter: archiveInput,
             }
 
             newKanban.columns = [
@@ -160,9 +171,19 @@ export function FormColumn(props: FormColumnProps) {
                     }
                 </fieldset>
             </div>
-            <div className='form-field full-width'>
+            <div className='form-field'>
                 <label htmlFor='order'>Ordem:</label>
                 <input id='order' type='number' value={orderInput} onChange={e => setOrderInput(parseInt(e.target.value))}></input>
+            </div>
+            <div className='form-field'>
+                <label htmlFor='archive'>Arquivar cards:</label>
+                <select id='archive' defaultValue={archiveInput} onChange={e => setArchiveInput(parseInt(e.target.value))}>
+                    {
+                        Object.entries(archiveOptions).map(([caption, seconds], index) => (
+                            <option key={index} value={seconds}>{caption}</option>
+                        ))
+                    }
+                </select>
             </div>
             <div className='form-field form-actions full-width'>
                 {

@@ -1,4 +1,4 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export interface KanbanData {
     columns: Array<Column>;
@@ -11,6 +11,12 @@ export interface Column {
     color: string;
     icon: IconProp;
     order: number;
+    archiveAfter: number;
+}
+
+export interface ColumnProps extends Column {
+    className?: string;
+    children?: React.ReactNode;
 }
 
 export interface Card {
@@ -28,11 +34,6 @@ export interface CardProps extends Card {
     className?: string;
     key: number;
     onClick?: () => void;
-}
-
-export interface ColumnProps extends Column {
-    className?: string;
-    children?: React.ReactNode;
 }
 
 export interface TimeTracker {
