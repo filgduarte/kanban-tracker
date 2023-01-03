@@ -51,7 +51,7 @@
     margin-top: 8px;
 }
 
-.add-card {
+.column__cards .add-card {
     position: relative;
     width: 100%;
     height: 128px;
@@ -62,11 +62,11 @@
     transition: background-color 300ms ease;
 }
 
-.add-card:hover {
+.column__cards .add-card:hover {
     background-color: var(--my-color-light);
 }
 
-.add-card button {
+.column__cards .add-card button {
     width: 100%;
     height: 100%;
     font-size: 1.5rem;
@@ -77,6 +77,6 @@
     transition: transform 300ms ease;
 }
 
-.add-card button:hover {
+.column__cards .add-card button:hover {
     transform: scale(1.1);
 }

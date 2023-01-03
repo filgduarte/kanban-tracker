@@ -15,6 +15,11 @@ export function FormCard(props: FormCardProps) {
     const [kanban, setKanban] = useRecoilState(kanbanState);
     const setModal = useSetRecoilState(modalState);
 
+    let formClassName = 'form ' + (props.card ? 'edit-card' : 'add-card');
+    if (props.className) {
+        formClassName += ' ' + props.className;
+    }
+
     function saveAndCloseModal(newKanban: KanbanData) {
         setKanban(newKanban);
         setKanbanData(newKanban);
@@ -75,7 +80,7 @@ export function FormCard(props: FormCardProps) {
             
             const cardToUpdate = kanban.cards[index];
             const newTimeTracker = {...cardToUpdate.timeTracker};
-            newTimeTracker[props.columnId] += now - cardToUpdate.lastChange;
+            newTimeTracker[props.columnId] += (now - cardToUpdate.lastChange) / 1000;
 
             const updatedCard: Card = {
                 id: cardToUpdate.id,
@@ -105,7 +110,7 @@ export function FormCard(props: FormCardProps) {
     }
 
     return(
-        <form className={'form ' + (props.className ?? '')}>
+        <form className={formClassName}>
             <div className='form-field full-width'>
                 <label htmlFor='title'>Título:</label>
                 <input type='text' id='title' value={titleInput} onChange={e => setTitleInput(e.target.value)} />
@@ -116,9 +121,9 @@ export function FormCard(props: FormCardProps) {
             </div>
             {
                 (props.card) &&
-                 <TimeTrackers trackers={props.card.timeTracker} lastChanged={props.card.lastChange} />
+                 <TimeTrackers card={props.card} />
             }
-            <div className='form-field full-width'>
+            <div className='form-field form-actions full-width'>
                 {
                     (kanban.columns.length > 1) &&
                     <button type='button' className='action-button danger' onClick={(removeCard)}><FontAwesomeIcon icon={faTrashCan} />Excluir</button>

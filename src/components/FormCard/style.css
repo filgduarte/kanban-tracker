@@ -1,0 +1,9 @@
+.form-field textarea {
+    width: 100%;
+    height: 96px;
+    padding: 8px;
+    background: var(--color-primary-light);
+    border: none;
+    border-radius: 2px;
+    resize: none;
+}

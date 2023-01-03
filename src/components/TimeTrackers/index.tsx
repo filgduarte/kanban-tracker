@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import { kanbanState } from '../../recoilState';
 import { TimeTrackerProps } from '../../types';
@@ -31,7 +31,12 @@ export function TimeTrackers(props: TimeTrackerProps) {
     }
 
     const kanban = useRecoilValue(kanbanState);
-    const [trackers, setTrackers] = useState(props.trackers);
+    const now = Date.now();
+    const [trackers, setTrackers] = useState(props.card.timeTracker);
+    const [totalTime, setTotalTime] = useState((now - props.card.creationDate) / 1000);
+    const [chartWidth, setChartWidth] = useState(0);
+    const ref = useRef<HTMLDivElement>(null);
+
     const columns: Columns = {};
 
     kanban.columns.forEach(column => {
@@ -42,26 +47,23 @@ export function TimeTrackers(props: TimeTrackerProps) {
         }
     });
 
-    // useEffect(() => {
-    //     const counter = setInterval(() => {
-    //         const newTrackers = {...props.trackers};
+    useEffect(() => {
+        if (ref.current) {
+            setChartWidth(ref.current.offsetWidth);
+        }
 
-    //         Object.keys(trackers).forEach(key => {
-    //             newTrackers[key] += Math.round(Date.now() - props.lastChanged);
-    //         })
+        const counter = setInterval(() => {
+            // JUST TO RE-RENDER THE TIMERS EVERY SECOND
+            setTrackers({...props.card.timeTracker});
+            setTotalTime((Date.now() - props.card.creationDate) / 1000);
+        }, 1000);
 
-    //         setTrackers(newTrackers);
-    //     }, 100);
+        return () => {
+            clearInterval(counter);
+        }
+    },[]);
 
-    //     return () => {
-    //         clearInterval(counter);
-    //     }
-    // },[]);
-
-    function renderTracker(columnId: string) {
-        const now = Date.now();
-        let secondsElapsed = Math.round(now - props.lastChanged + trackers[columnId]) / 1000;
-
+    function formatTime(secondsElapsed: number) {
         const days = Math.floor(secondsElapsed / 86400);
         secondsElapsed -= days * 86400;
     
@@ -73,6 +75,23 @@ export function TimeTrackers(props: TimeTrackerProps) {
     
         const seconds = Math.round(secondsElapsed % 60);
 
+        return {
+            days: String(days).padStart(2, '0'),
+            hours: String(hours).padStart(2, '0'),
+            minutes: String(minutes).padStart(2, '0'),
+            seconds: String(seconds).padStart(2, '0'),
+        }
+    }
+
+    function renderTracker(columnId: string) {
+        let secondsElapsed = trackers[columnId];
+
+        if (columnId == props.card.columnId) {
+            secondsElapsed += Math.abs(now - props.card.lastChange) / 1000;
+        }
+
+        const formatedTime = formatTime(secondsElapsed);
+
         return(
             <div key={columnId} className={`time-tracker ${columns[columnId].color}`}>
                 <div className='time-tracker__title'>
@@ -82,22 +101,58 @@ export function TimeTrackers(props: TimeTrackerProps) {
                     </h2>
                 </div>
                 <div className='time-tracker__counter'>
-                    <span className="time-tracker__days">{String(days).padStart(2, '0')}</span>:
-                    <span className="time-tracker__hours">{String(hours).padStart(2, '0')}</span>:
-                    <span className="time-tracker__minutes">{String(minutes).padStart(2, '0')}</span>:
-                    <span className="time-tracker__seconds">{String(seconds).padStart(2, '0')}</span>
+                    <span className="time-tracker__days">{formatedTime.days}</span>:
+                    <span className="time-tracker__hours">{formatedTime.hours}</span>:
+                    <span className="time-tracker__minutes">{formatedTime.minutes}</span>:
+                    <span className="time-tracker__seconds">{formatedTime.seconds}</span>
                 </div>
             </div>
         )
     }
 
-    function renderGraph() {
-        
+    function renderChart() {
+        const formatedTime = formatTime(totalTime);
+        const timeTrackers = Object.entries(props.card.timeTracker);
+        let cssGradient = `radial-gradient(var(--color-background) 50%, transparent 51%),
+                           conic-gradient(`;
+
+        timeTrackers.forEach(([columnId, seconds], index) => {
+            const percentage = Math.round((seconds * 100) / totalTime);
+            let prevPercentage = 0;
+            if (index > 0) {
+                prevPercentage =  Math.round((timeTrackers[index - 1][1] * 100) / totalTime);
+            }
+
+            cssGradient += `var(--${columns[columnId].color}) ${prevPercentage + 0.1}% ${percentage}%`;
+            
+            if (index < (timeTrackers.length - 1)) {
+                cssGradient += ', ';
+            }
+        });
+
+        cssGradient += ')';
+
+        return (
+            <div className='donut-chart' ref={ref} style={{backgroundImage: cssGradient, minHeight: chartWidth}}>
+                <h4>Tempo total:</h4>
+                <div className='time-tracker__counter'>
+                    <span className="time-tracker__days">{formatedTime.days}</span>:
+                    <span className="time-tracker__hours">{formatedTime.hours}</span>:
+                    <span className="time-tracker__minutes">{formatedTime.minutes}</span>:
+                    <span className="time-tracker__seconds">{formatedTime.seconds}</span>
+                </div>
+            </div>
+        );
     }
 
     return(
         <div className='time-tracker'>
-            { Object.keys(props.trackers).map(key => renderTracker(key)) }
+            <div className='time-tracker__columns'>
+            { Object.keys(props.card.timeTracker).map(key => renderTracker(key)) }
+            </div>
+            <div className='time-tracker__chart'>
+                {renderChart()}
+            </div>
         </div>
     )
 }

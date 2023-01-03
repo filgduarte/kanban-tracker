@@ -1,0 +1,54 @@
+.form.edit-card {
+    max-width: 600px;
+}
+
+.time-tracker {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+}
+
+.time-tracker + .time-tracker {
+    margin-top: 16px;
+}
+
+.time-tracker__columns {
+    min-width: calc(50% - 8px);
+}
+
+.time-tracker__title {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    width: 100%;
+    color: var(--color-background);
+    background: var(--my-color);
+    border-radius: 2px;
+}
+
+.time-tracker__title .icon {
+    margin-right: 8px;
+}
+
+.time-tracker__title h2 {
+    font-size: 1rem;
+}
+
+.time-tracker__columns .time-tracker__counter {
+    display: flex;
+    align-items: center;
+    min-width: 104px;
+}
+
+.time-tracker__chart {
+    height: 100%;
+    flex-grow: 1;
+}
+
+.time-tracker__chart .donut-chart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}

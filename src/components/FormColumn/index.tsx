@@ -166,7 +166,7 @@ export function FormColumn(props: FormColumnProps) {
                 <label htmlFor='order'>Ordem:</label>
                 <input id='order' type='number' value={orderInput} onChange={e => setOrderInput(parseInt(e.target.value))}></input>
             </div>
-            <div className='form-field full-width'>
+            <div className='form-field form-actions full-width'>
                 {
                     (kanban.columns.length > 1) &&
                     <button type='button' className='action-button danger' onClick={(removeColumn)}><FontAwesomeIcon icon='trash-can' />Excluir</button>

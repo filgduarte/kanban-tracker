@@ -44,7 +44,7 @@ export function Card(props: CardProps) {
             newTimeTracker[goTo] = 0;
         }
 
-        newTimeTracker[props.columnId] += now - cardToUpdate.lastChange;
+        newTimeTracker[props.columnId] += (now - cardToUpdate.lastChange) / 1000;
 
         const updatedCard = {
             id: cardToUpdate.id,

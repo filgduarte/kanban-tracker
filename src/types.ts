@@ -39,9 +39,11 @@ export interface TimeTracker {
     [key: string]: number; // [columnId] = seconds
 }
 
-export interface TimeTrackerProps {
-    trackers: TimeTracker;
-    lastChanged: number;
+export interface ModalProps {
+    show: boolean;
+    title?: string;
+    children?: React.ReactNode;
+    className?: string;
 }
 
 export interface FormColumnProps {
@@ -55,9 +57,6 @@ export interface FormCardProps {
     className?: string;
 }
 
-export interface ModalProps {
-    show: boolean;
-    title?: string;
-    children?: React.ReactNode;
-    className?: string;
+export interface TimeTrackerProps {
+    card: Card;
 }
