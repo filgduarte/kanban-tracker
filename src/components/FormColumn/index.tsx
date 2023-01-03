@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { kanbanState, modalState } from '../../recoilState';
 import { nanoid } from 'nanoid';
@@ -21,8 +21,6 @@ library.add(
     faDownload,
     faTimes,
 );
-
-
 
 export function FormColumn(props: FormColumnProps) {
     const iconOptions: Array<IconProp> = [
@@ -173,17 +171,6 @@ export function FormColumn(props: FormColumnProps) {
                 }
                 <button type='button' className='action-button warning' onClick={(discardChanges)}><FontAwesomeIcon icon='times' />Cancelar</button>
                 <button type='submit' className='action-button success' onClick={(saveColumn)}><FontAwesomeIcon icon='download' />Salvar</button>
-            </div>
-        </form>
-    )
-}
-
-export function FormCard(props: FormCardProps) {
-    return(
-        <form className={'form ' + (props.className ?? '')}>
-            <div className='form-field'>
-                <label htmlFor='title'>Título:</label>
-                <input name='title' type='text' value={(props.card ? props.card.title : '')}></input>
             </div>
         </form>
     )

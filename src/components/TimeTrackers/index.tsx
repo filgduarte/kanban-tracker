@@ -4,7 +4,7 @@ import { kanbanState } from '../../recoilState';
 import { TimeTrackerProps } from '../../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp, library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faDownload, faInbox, faLayerGroup, faPause, faPlay, faTrashCan, faUserClock, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faDownload, faInbox, faLayerGroup, faPause, faPlay, faTrashCan, faUserClock } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
 library.add(
@@ -15,8 +15,7 @@ library.add(
     faPlay,
     faTrashCan,
     faUserClock,
-    faDownload,
-    faPenToSquare
+    faDownload
 );
 
 export function TimeTrackers(props: TimeTrackerProps) {

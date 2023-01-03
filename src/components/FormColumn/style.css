@@ -76,3 +76,8 @@ fieldset {
     background-color: var(--my-color);
     border-radius: 50%;
 }
+
+.form-field.form-actions {
+    display: flex;
+    justify-content: flex-end;
+}

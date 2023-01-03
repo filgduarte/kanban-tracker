@@ -1,15 +1,14 @@
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { kanbanState, modalState } from '../../recoilState';
 import { Column } from '../Column';
 import { Card } from '../Card';
 import { FormColumn } from '../FormColumn';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { kanbanState, modalState } from '../../recoilState';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
 export function KanbanBoard() {
     const kanban = useRecoilValue(kanbanState);
-
     const setModal = useSetRecoilState(modalState);
     
     function openColumnModal(event: React.MouseEvent<HTMLElement>) {

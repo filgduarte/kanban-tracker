@@ -125,7 +125,7 @@ export function FormCard(props: FormCardProps) {
             }
             <div className='form-field form-actions full-width'>
                 {
-                    (kanban.columns.length > 1) &&
+                    (props.card) &&
                     <button type='button' className='action-button danger' onClick={(removeCard)}><FontAwesomeIcon icon={faTrashCan} />Excluir</button>
                 }
                 <button type='button' className='action-button warning' onClick={(discardChanges)}><FontAwesomeIcon icon={faTimes} />Cancelar</button>

@@ -21,8 +21,6 @@ library.add(
 );
 
 export function Card(props: CardProps) {
-    
-
     const [kanban, setKanban] = useRecoilState(kanbanState);
     const setModal = useSetRecoilState(modalState);
 
