@@ -8,8 +8,8 @@ export interface KanbanData {
 export interface Column {
     id: string;
     title: string;
-    color?: string;
-    icon?: IconProp;
+    color: string;
+    icon: IconProp;
     order: number;
 }
 
@@ -41,6 +41,7 @@ export interface TimeTracker {
 
 export interface TimeTrackerProps {
     trackers: TimeTracker;
+    lastChanged: number;
 }
 
 export interface FormColumnProps {

@@ -74,7 +74,7 @@ export function FormCard(props: FormCardProps) {
             }
             
             const cardToUpdate = kanban.cards[index];
-            const newTimeTracker = cardToUpdate.timeTracker;
+            const newTimeTracker = {...cardToUpdate.timeTracker};
             newTimeTracker[props.columnId] += now - cardToUpdate.lastChange;
 
             const updatedCard: Card = {
@@ -114,10 +114,10 @@ export function FormCard(props: FormCardProps) {
                 <label htmlFor='description'>Descrição:</label>
                 <textarea name='description' onChange={e => setDescriptionInput(e.target.value)} value={descriptionInput}></textarea>
             </div>
-            {/* {
+            {
                 (props.card) &&
-                 <TimeTrackers trackers={props.card.timeTracker} />
-            } */}
+                 <TimeTrackers trackers={props.card.timeTracker} lastChanged={props.card.lastChange} />
+            }
             <div className='form-field full-width'>
                 {
                     (kanban.columns.length > 1) &&

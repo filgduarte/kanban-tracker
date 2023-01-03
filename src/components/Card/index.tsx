@@ -21,6 +21,8 @@ library.add(
 );
 
 export function Card(props: CardProps) {
+    
+
     const [kanban, setKanban] = useRecoilState(kanbanState);
     const setModal = useSetRecoilState(modalState);
 
@@ -70,8 +72,8 @@ export function Card(props: CardProps) {
 
     return(
         <div className='card'>
-            <div className='card-content' title={`Editar card "${props.title}"`}>
-                <div className='card-title' onClick={openCardModal}>
+            <div className='card-content' title={`Editar card "${props.title}"`} onClick={openCardModal}>
+                <div className='card-title'>
                     <h3>
                         {props.title}
                     </h3>
