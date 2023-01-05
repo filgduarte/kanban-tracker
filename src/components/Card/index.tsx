@@ -24,6 +24,38 @@ export function Card(props: CardProps) {
     const [kanban, setKanban] = useRecoilState(kanbanState);
     const setModal = useSetRecoilState(modalState);
 
+    return(
+        <div className='card'>
+            <div className='card-content' title={`Editar card '${props.title}'`} onClick={openCardModal}>
+                <div className='card-title'>
+                    <h3>
+                        {props.title}
+                    </h3>
+                    <FontAwesomeIcon icon='pen-to-square' />
+                </div>
+                <div className='card-description'>
+                {
+                    props.description?.split('\n').map((line, index) => (
+                        <p key={index}>
+                            {line}
+                        </p>
+                    ))
+                }
+                </div>
+            </div>
+            <div className='card-actions'>
+                {
+                    kanban.columns.filter(column => column.id != props.columnId)
+                    .map((column, index) => (
+                        <button key={index} className={`action-button ${column.color ?? ''}`} onClick={() => changeColumn(column.id)}>
+                            {<FontAwesomeIcon icon={column.icon ?? 'layer-group'} />}
+                        </button>
+                    ))
+                }
+            </div>
+        </div>
+    );
+
     function openCardModal() {
         setModal({
             show: true,
@@ -67,28 +99,4 @@ export function Card(props: CardProps) {
         setKanban(newKanban);
         setKanbanData(newKanban);
     }
-
-    return(
-        <div className='card'>
-            <div className='card-content' title={`Editar card '${props.title}'`} onClick={openCardModal}>
-                <div className='card-title'>
-                    <h3>
-                        {props.title}
-                    </h3>
-                    <FontAwesomeIcon icon='pen-to-square' />
-                </div>
-                <p>{props.description}</p>
-            </div>
-            <div className='card-actions'>
-                {
-                    kanban.columns.filter(column => column.id != props.columnId)
-                    .map((column, index) => (
-                        <button key={index} className={`action-button ${column.color ?? ''}`} onClick={() => changeColumn(column.id)}>
-                            {<FontAwesomeIcon icon={column.icon ?? 'layer-group'} />}
-                        </button>
-                    ))
-                }
-            </div>
-        </div>
-    )
 }

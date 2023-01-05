@@ -20,13 +20,38 @@ export function FormCard(props: FormCardProps) {
         formClassName += ' ' + props.className;
     }
 
+    return(
+        <form className={formClassName}>
+            <div className='form-field full-width'>
+                <label htmlFor='title'>Título:</label>
+                <input type='text' id='title' value={titleInput} onChange={e => setTitleInput(e.target.value)} />
+            </div>
+            <div className='form-field full-width'>
+                <label htmlFor='description'>Descrição:</label>
+                <textarea name='description' onChange={e => setDescriptionInput(e.target.value)} value={descriptionInput}></textarea>
+            </div>
+            {
+                (props.card) &&
+                 <TimeTrackers card={props.card} />
+            }
+            <div className='form-field form-actions full-width'>
+                {
+                    (props.card) &&
+                    <button type='button' className='action-button danger' onClick={(removeCard)}><FontAwesomeIcon icon={faTrashCan} />Excluir</button>
+                }
+                <button type='button' className='action-button warning' onClick={(discardChanges)}><FontAwesomeIcon icon={faTimes} />Cancelar</button>
+                <button type='submit' className='action-button success' onClick={(saveCard)}><FontAwesomeIcon icon={faDownload} />Salvar</button>
+            </div>
+        </form>
+    );
+
     function saveAndCloseModal(newKanban: KanbanData) {
         setKanban(newKanban);
         setKanbanData(newKanban);
         setModal({show: false});
     }
 
-    const removeCard = (event: React.MouseEvent<HTMLElement>) => {
+    function removeCard(event: React.MouseEvent<HTMLElement>) {
         const index = kanban.cards.findIndex((card) => card.id == props.card?.id);
         if (index < 0) {
             alert('Não foi possível encontrar o id do card.');
@@ -43,7 +68,7 @@ export function FormCard(props: FormCardProps) {
         }
     }
 
-    const saveCard = (event: React.MouseEvent<HTMLButtonElement>) => {
+    function saveCard (event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
         const index = kanban.cards.findIndex((card) => card.id == props.card?.id);
 
@@ -103,34 +128,9 @@ export function FormCard(props: FormCardProps) {
         saveAndCloseModal(newKanban);
     }
 
-    const discardChanges = (event: React.MouseEvent<HTMLButtonElement>) => {
+    function discardChanges(event: React.MouseEvent<HTMLButtonElement>) {
         if (confirm('Tem certeza de que quer descartar as alterações?')) {
             setModal({show: false});
         }
     }
-
-    return(
-        <form className={formClassName}>
-            <div className='form-field full-width'>
-                <label htmlFor='title'>Título:</label>
-                <input type='text' id='title' value={titleInput} onChange={e => setTitleInput(e.target.value)} />
-            </div>
-            <div className='form-field full-width'>
-                <label htmlFor='description'>Descrição:</label>
-                <textarea name='description' onChange={e => setDescriptionInput(e.target.value)} value={descriptionInput}></textarea>
-            </div>
-            {
-                (props.card) &&
-                 <TimeTrackers card={props.card} />
-            }
-            <div className='form-field form-actions full-width'>
-                {
-                    (props.card) &&
-                    <button type='button' className='action-button danger' onClick={(removeCard)}><FontAwesomeIcon icon={faTrashCan} />Excluir</button>
-                }
-                <button type='button' className='action-button warning' onClick={(discardChanges)}><FontAwesomeIcon icon={faTimes} />Cancelar</button>
-                <button type='submit' className='action-button success' onClick={(saveCard)}><FontAwesomeIcon icon={faDownload} />Salvar</button>
-            </div>
-        </form>
-    )
 }

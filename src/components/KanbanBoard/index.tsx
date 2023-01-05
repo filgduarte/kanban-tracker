@@ -11,14 +11,6 @@ export function KanbanBoard() {
     const kanban = useRecoilValue(kanbanState);
     const setModal = useSetRecoilState(modalState);
     
-    function openColumnModal(event: React.MouseEvent<HTMLElement>) {
-        setModal({
-            show: true,
-            title: 'Inserir coluna',
-            children: <FormColumn />,
-        })
-    }
-
     return(
         <main>
             <div className='kanban-board'>
@@ -62,5 +54,13 @@ export function KanbanBoard() {
             }
             </div>
         </main>
-    )
+    );
+
+    function openColumnModal(event: React.MouseEvent<HTMLElement>) {
+        setModal({
+            show: true,
+            title: 'Inserir coluna',
+            children: <FormColumn />,
+        })
+    }
 }

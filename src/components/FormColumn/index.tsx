@@ -59,83 +59,7 @@ export function FormColumn(props: FormColumnProps) {
     const [orderInput, setOrderInput] = useState(props.column ? props.column.order : (kanban.columns.length + 1));
     const [archiveInput, setArchiveInput] = useState(props.column ? props.column.archiveAfter : archiveOptions['Não']);
 
-    function saveAndCloseModal(newKanban: KanbanData) {
-        setKanbanState(newKanban);
-        setKanbanData(newKanban);
-        setModal({show: false})
-    }
-
-    const removeColumn = (event: React.MouseEvent<HTMLElement>) => {
-        const index = kanban.columns.findIndex((column) => column.id == props.column?.id);
-        if (index < 0) {
-            alert('Não foi possível encontrar o id da coluna.');
-            return
-        };
-
-        if (confirm('Tem certeza de que quer excluir essa coluna?')) {
-            const newKanban = {
-                columns: [...kanban.columns.slice(0, index), ...kanban.columns.slice(index + 1)],
-                cards: kanban.cards,
-            };
-
-            saveAndCloseModal(newKanban);
-        }
-    }
-
-    const saveColumn = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-        const index = kanban.columns.findIndex((column) => column.id == props.column?.id);
-        let newKanban: KanbanData = {
-            columns: [],
-            cards: kanban.cards,
-        }
-
-        if (index < 0) {
-            const newColumn: Column = {
-                id: nanoid(),
-                title: titleInput,
-                color: colorInput,
-                icon: iconInput,
-                order: orderInput,
-                archiveAfter: 0,
-            }
-
-            newKanban.columns = [
-                ...kanban.columns,
-                newColumn
-            ]
-        }
-        else {
-            if (confirm('Tem certeza de que quer alterar essa coluna?') == false) {
-                return
-            }
-
-            const columnToUpdate: Column = {
-                id: kanban.columns[index].id,
-                title: titleInput,
-                color: colorInput,
-                icon: iconInput,
-                order: orderInput,
-                archiveAfter: archiveInput,
-            }
-
-            newKanban.columns = [
-                ...kanban.columns.slice(0, index),
-                columnToUpdate,
-                ...kanban.columns.slice(index + 1),
-            ];
-        }
-
-        saveAndCloseModal(newKanban);
-    }
-
-    const discardChanges = (event: React.MouseEvent<HTMLButtonElement>) => {
-        if (confirm('Tem certeza de que quer descartar as alterações?')) {
-            setModal({show: false});
-        }
-    }
-
-    return(
+return(
         <form className={'form ' + (props.className ?? '')}>
             <div className='form-field full-width'>
                 <label htmlFor='title'>Título:</label>
@@ -194,5 +118,81 @@ export function FormColumn(props: FormColumnProps) {
                 <button type='submit' className='action-button success' onClick={(saveColumn)}><FontAwesomeIcon icon='download' />Salvar</button>
             </div>
         </form>
-    )
+    );
+
+    function saveAndCloseModal(newKanban: KanbanData) {
+        setKanbanState(newKanban);
+        setKanbanData(newKanban);
+        setModal({show: false})
+    }
+
+    function removeColumn (event: React.MouseEvent<HTMLElement>) {
+        const index = kanban.columns.findIndex((column) => column.id == props.column?.id);
+        if (index < 0) {
+            alert('Não foi possível encontrar o id da coluna.');
+            return
+        };
+
+        if (confirm('Tem certeza de que quer excluir essa coluna?')) {
+            const newKanban = {
+                columns: [...kanban.columns.slice(0, index), ...kanban.columns.slice(index + 1)],
+                cards: kanban.cards,
+            };
+
+            saveAndCloseModal(newKanban);
+        }
+    }
+
+    function saveColumn(event: React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
+        const index = kanban.columns.findIndex((column) => column.id == props.column?.id);
+        let newKanban: KanbanData = {
+            columns: [],
+            cards: kanban.cards,
+        }
+
+        if (index < 0) {
+            const newColumn: Column = {
+                id: nanoid(),
+                title: titleInput,
+                color: colorInput,
+                icon: iconInput,
+                order: orderInput,
+                archiveAfter: 0,
+            }
+
+            newKanban.columns = [
+                ...kanban.columns,
+                newColumn
+            ]
+        }
+        else {
+            if (confirm('Tem certeza de que quer alterar essa coluna?') == false) {
+                return
+            }
+
+            const columnToUpdate: Column = {
+                id: kanban.columns[index].id,
+                title: titleInput,
+                color: colorInput,
+                icon: iconInput,
+                order: orderInput,
+                archiveAfter: archiveInput,
+            }
+
+            newKanban.columns = [
+                ...kanban.columns.slice(0, index),
+                columnToUpdate,
+                ...kanban.columns.slice(index + 1),
+            ];
+        }
+
+        saveAndCloseModal(newKanban);
+    }
+
+    function discardChanges (event: React.MouseEvent<HTMLButtonElement>) {
+        if (confirm('Tem certeza de que quer descartar as alterações?')) {
+            setModal({show: false});
+        }
+    }
 }

@@ -16,12 +16,34 @@
     border-radius: 2px 2px 0 0;
 }
 
+.header .extra {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: auto;
+    padding-bottom: 8px;
+}
+
+.header .import-export a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    width: 32px;
+    height: 28px;
+    font-size: 1.1rem;
+    text-align: center;
+    text-decoration: none;
+}
+
+.header .import-export svg {
+    margin: 0;
+}
+
 .header .storage-status {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: auto;
-    padding-bottom: 8px;
     font-size: 0.875rem;
     color: var(--color-primary-dark)
 }

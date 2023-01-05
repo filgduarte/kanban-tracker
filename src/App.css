@@ -12,6 +12,9 @@
   --color-primary-dark: hsl(184, 6%, 53%);
   --color-text: #000;
   --color-background: #FFF;
+  --color-success: #27ae60;
+  --color-warning: #f39c12;
+  --color-danger: #c0392b;
 
   --color-1: hsl(48, 89%, 50%);
   --color-2: hsl(145, 63%, 50%);
@@ -82,16 +85,16 @@ body {
   --my-color-dark: hsl(28, 80%, 10%);
 }
 
-.danger {
-  --my-color: #c0392b;
+.success {
+  --my-color: var(--color-success);
 }
 
 .warning {
-  --my-color: #f39c12;
+  --my-color: var(--color-warning);
 }
 
-.success {
-  --my-color: #27ae60;
+.danger {
+  --my-color: var(--color-danger);
 }
 
 .action-button {

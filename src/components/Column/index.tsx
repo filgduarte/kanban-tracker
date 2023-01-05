@@ -24,22 +24,6 @@ library.add(
 
 export function Column(props: ColumnProps) {
     const setModal = useSetRecoilState(modalState);
-    
-    function openColumnModal() {
-        setModal({
-            show: true,
-            title: 'Alterar coluna',
-            children: <FormColumn column={props} />,
-        })
-    }
-
-    function openCardModal() {
-        setModal({
-            show: true,
-            title: 'Inserir Card',
-            children: <FormCard columnId={props.id} />,
-        })
-    }
 
     let columnClass = 'column';
     if (props.className) {
@@ -72,4 +56,21 @@ export function Column(props: ColumnProps) {
             </div>
         </div>
     );
+
+    function openColumnModal() {
+        setModal({
+            show: true,
+            title: 'Alterar coluna',
+            children: <FormColumn column={props} />,
+        })
+    }
+
+    function openCardModal() {
+        setModal({
+            show: true,
+            title: 'Inserir Card',
+            children: <FormCard columnId={props.id} />,
+        })
+    }
+
 }

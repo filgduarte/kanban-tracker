@@ -35,7 +35,6 @@ export function TimeTrackers(props: TimeTrackerProps) {
     const [totalTime, setTotalTime] = useState((now - props.card.creationDate) / 1000);
     const [chartWidth, setChartWidth] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
-
     const columns: Columns = {};
 
     kanban.columns.forEach(column => {
@@ -61,6 +60,17 @@ export function TimeTrackers(props: TimeTrackerProps) {
             clearInterval(counter);
         }
     },[]);
+
+    return(
+        <div className='time-tracker'>
+            <div className='time-tracker__columns'>
+            { Object.keys(props.card.timeTracker).map(key => renderTracker(key)) }
+            </div>
+            <div className='time-tracker__chart'>
+                {renderChart()}
+            </div>
+        </div>
+    );
 
     function formatTime(secondsElapsed: number) {
         const days = Math.floor(secondsElapsed / 86400);
@@ -143,15 +153,4 @@ export function TimeTrackers(props: TimeTrackerProps) {
             </div>
         );
     }
-
-    return(
-        <div className='time-tracker'>
-            <div className='time-tracker__columns'>
-            { Object.keys(props.card.timeTracker).map(key => renderTracker(key)) }
-            </div>
-            <div className='time-tracker__chart'>
-                {renderChart()}
-            </div>
-        </div>
-    )
 }

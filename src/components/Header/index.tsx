@@ -1,6 +1,14 @@
+import { useRecoilState } from 'recoil';
+import { kanbanState } from '../../recoilState';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons'
 import './style.css';
 
 export function Header() {
+    const kanbanData = useRecoilState(kanbanState);
+    const blob = new Blob([JSON.stringify(kanbanData)], { type: 'text/json'});
+    const jsonFile = URL.createObjectURL(blob);
+
     const total = 5120;
     let used = 0;
     
@@ -11,7 +19,6 @@ export function Header() {
         }
     }
     const storageUsePercentage = (used * 100) / total;
-    const storageUsedWidth = storageUsePercentage.toFixed(2) + '%';
 
     let storageStatus = '';
     if (used < 1024) {
@@ -26,16 +33,23 @@ export function Header() {
     if (storageUsePercentage >= 75) {
         storageUsedClassName += ' ' + ((storageUsePercentage >= 90) ? 'danger' : 'warning');
     }
-    
-    return(
+
+     return(
         <header className='header'>
             <div className='tab'>Kanban Tracker</div>
-            <div className='storage-status'>
-                <span>Storage use: {`${used.toFixed(2)}KB / ${total/1024}Mb`}</span>
-                <div className='storage-total'>
-                    <div className={storageUsedClassName} style={{width: storageUsedWidth}}></div>
+            <div className='extra'>
+                <div className='import-export'>
+                    <a href={jsonFile} download='kanban-tracker.json' title='Fazer download dos dados' className='action-button success'>
+                        <FontAwesomeIcon icon={faFileArrowDown} />
+                    </a>
+                </div>
+                <div className='storage-status'>
+                    <span>Storage use: {storageStatus}</span>
+                    <div className='storage-total'>
+                        <div className={storageUsedClassName} style={{width: (storageUsePercentage.toFixed(2) + '%')}}></div>
+                    </div>
                 </div>
             </div>
         </header>
-    )
+    );
 }
