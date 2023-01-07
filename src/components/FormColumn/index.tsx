@@ -7,7 +7,7 @@ import { setKanbanData } from '../../kanbanDataHandler';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faDownload, faInbox, faLayerGroup, faPause, faPlay, faTimes, faTrashCan, faUserClock } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faInbox, faLayerGroup, faPause, faPlay, faTimes, faUserClock, faBan } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
 library.add(
@@ -16,10 +16,9 @@ library.add(
     faLayerGroup,
     faPause,
     faPlay,
-    faTrashCan,
     faUserClock,
-    faDownload,
     faTimes,
+    faBan,
 );
 
 export function FormColumn(props: FormColumnProps) {
@@ -30,7 +29,7 @@ export function FormColumn(props: FormColumnProps) {
         'pause',
         'user-clock',
         'check',
-        'trash-can',
+        'ban',
     ];
 
     const colorOptions = [
@@ -115,7 +114,7 @@ return(
                     <button type='button' className='action-button danger' onClick={(removeColumn)}><FontAwesomeIcon icon='trash-can' />Excluir</button>
                 }
                 <button type='button' className='action-button warning' onClick={(discardChanges)}><FontAwesomeIcon icon='times' />Cancelar</button>
-                <button type='submit' className='action-button success' onClick={(saveColumn)}><FontAwesomeIcon icon='download' />Salvar</button>
+                <button type='submit' className='action-button success' onClick={(saveColumn)}><FontAwesomeIcon icon='check' />Salvar</button>
             </div>
         </form>
     );

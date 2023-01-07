@@ -59,7 +59,7 @@ export function KanbanBoard() {
     function openColumnModal(event: React.MouseEvent<HTMLElement>) {
         setModal({
             show: true,
-            title: 'Inserir coluna',
+            title: 'Adicionar coluna',
             children: <FormColumn />,
         })
     }

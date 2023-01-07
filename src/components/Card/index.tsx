@@ -5,7 +5,7 @@ import { setKanbanData } from '../../kanbanDataHandler';
 import { FormCard } from '../FormCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faDownload, faInbox, faLayerGroup, faPause, faPlay, faTrashCan, faUserClock, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faDownload, faInbox, faLayerGroup, faPause, faPlay, faUserClock, faPenToSquare, faBan } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
 library.add(
@@ -14,10 +14,10 @@ library.add(
     faLayerGroup,
     faPause,
     faPlay,
-    faTrashCan,
     faUserClock,
     faDownload,
-    faPenToSquare
+    faPenToSquare,
+    faBan,
 );
 
 export function Card(props: CardProps) {
@@ -26,7 +26,7 @@ export function Card(props: CardProps) {
 
     return(
         <div className='card'>
-            <div className='card-content' title={`Editar card '${props.title}'`} onClick={openCardModal}>
+            <div className='card-content' title={`Editar card "${props.title}"`} onClick={openCardModal}>
                 <div className='card-title'>
                     <h3>
                         {props.title}
@@ -47,7 +47,7 @@ export function Card(props: CardProps) {
                 {
                     kanban.columns.filter(column => column.id != props.columnId)
                     .map((column, index) => (
-                        <button key={index} className={`action-button ${column.color ?? ''}`} onClick={() => changeColumn(column.id)}>
+                        <button key={index} title={column.title} className={`action-button icon-only small ${column.color ?? ''}`} onClick={() => changeColumn(column.id)}>
                             {<FontAwesomeIcon icon={column.icon ?? 'layer-group'} />}
                         </button>
                     ))

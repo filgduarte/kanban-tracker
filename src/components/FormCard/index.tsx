@@ -6,7 +6,7 @@ import { Card, KanbanData, FormCardProps } from '../../types';
 import { setKanbanData } from '../../kanbanDataHandler';
 import { TimeTrackers } from '../TimeTrackers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faTimes, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTimes, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
 export function FormCard(props: FormCardProps) {
@@ -40,7 +40,7 @@ export function FormCard(props: FormCardProps) {
                     <button type='button' className='action-button danger' onClick={(removeCard)}><FontAwesomeIcon icon={faTrashCan} />Excluir</button>
                 }
                 <button type='button' className='action-button warning' onClick={(discardChanges)}><FontAwesomeIcon icon={faTimes} />Cancelar</button>
-                <button type='submit' className='action-button success' onClick={(saveCard)}><FontAwesomeIcon icon={faDownload} />Salvar</button>
+                <button type='submit' className='action-button success' onClick={(saveCard)}><FontAwesomeIcon icon={faCheck} />Salvar</button>
             </div>
         </form>
     );

@@ -49,14 +49,10 @@
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
-    margin: 4px 4px 8px;
+    margin: 4px 4px;
 }
 
 .card .action-button {
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    font-size: 0.875rem;
     background-color: var(--my-color);
     box-shadow: 0 3px 0 rgba(0,0,0,.2),
               0 3px 0 var(--my-color);
@@ -64,8 +60,4 @@
 
 .card .action-button + .action-button {
     margin-left: 4px;
-}
-
-.card .action-button svg {
-    margin: 0 auto;
 }

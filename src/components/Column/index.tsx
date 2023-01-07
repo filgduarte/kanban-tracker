@@ -5,7 +5,7 @@ import { FormColumn } from '../FormColumn';
 import { FormCard } from '../FormCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faDownload, faInbox, faLayerGroup, faPause, faPlay, faTimes, faTrashCan, faUserClock, faPlus, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faDownload, faInbox, faLayerGroup, faPause, faPlay, faTimes, faUserClock, faPlus, faPenToSquare, faBan } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
 library.add(
@@ -14,12 +14,12 @@ library.add(
     faLayerGroup,
     faPause,
     faPlay,
-    faTrashCan,
     faUserClock,
     faDownload,
     faTimes,
     faPlus,
     faPenToSquare,
+    faBan,
 );
 
 export function Column(props: ColumnProps) {
@@ -37,7 +37,7 @@ export function Column(props: ColumnProps) {
 
     return(
         <div className={columnClass} style={{order: props.order}}>
-            <div className='column__header' onClick={openColumnModal} title={`Editar coluna '${props.title}'`}>
+            <div className='column__header' onClick={openColumnModal} title={`Editar coluna "${props.title}"`}>
                 <div className='column__title'>
                     <h2>
                         <span className='icon'><FontAwesomeIcon icon={columnIcon} /></span>
@@ -68,7 +68,7 @@ export function Column(props: ColumnProps) {
     function openCardModal() {
         setModal({
             show: true,
-            title: 'Inserir Card',
+            title: 'Adicionar Card',
             children: <FormCard columnId={props.id} />,
         })
     }

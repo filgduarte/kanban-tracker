@@ -19,38 +19,22 @@
 .header .extra {
     display: flex;
     align-items: center;
-    gap: 16px;
     margin-left: auto;
     padding-bottom: 8px;
-}
-
-.header .import-export a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    width: 32px;
-    height: 28px;
-    font-size: 1.1rem;
-    text-align: center;
-    text-decoration: none;
-}
-
-.header .import-export svg {
-    margin: 0;
 }
 
 .header .storage-status {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-size: 0.875rem;
+    margin-right: 8px;
+    height: 24px;
+    font-size: 0.75rem;
     color: var(--color-primary-dark)
 }
 
 .header .storage-status .storage-total {
-    width: 200px;
-    height:16px;
+    height: 11px;
     background-color: var(--color-primary);
     border-radius: 2px;
 }
@@ -59,4 +43,76 @@
     --my-color: var(--color-primary-dark);
     height: 100%;
     background-color: var(--my-color);
+}
+
+.header .main-nav .menu {
+    display: flex;
+    gap: 8px;
+    list-style-type: none;
+}
+
+.header .main-nav .menu__item {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.header .main-nav .menu__item a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: var(--color-primary-dark);
+    border-radius: 2px;
+}
+
+.header .main-nav .menu__item > a:hover,
+.header .main-nav .menu__item:has(.open-submenu) {
+    background-color: var(--color-background);
+}
+
+.header .main-nav .submenu {
+    display: none;
+    position: absolute;
+    top: 24px;
+    right: 0;
+    width: 150px;
+    list-style-type: none;
+    background-color: var(--color-background);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.header .main-nav .menu__item a.open-submenu + .submenu {
+    display: block;
+    font-size: 0.875rem;
+}
+
+.header .main-nav .submenu__item {
+    position: relative;
+    padding: 4px;
+}
+
+.header .main-nav .submenu__item + .submenu__item {
+    padding-top: 0;
+}
+
+.header .main-nav .submenu__item a,
+.header .main-nav .submenu__item label {
+    display: block;
+    padding: 4px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--color-primary-dark);
+    cursor: pointer;
+}
+
+.header .main-nav .submenu__item a:hover,
+.header .main-nav .submenu__item label:hover {
+    background-color: var(--color-primary-light);
+}
+
+.header .main-nav .submenu__item .hidden-input {
+    display: none;
 }
