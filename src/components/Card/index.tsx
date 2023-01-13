@@ -1,27 +1,14 @@
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { kanbanState, modalState } from '../../recoilState';
-import { KanbanData, CardProps } from '../../types';
-import { setKanbanData } from '../../kanbanDataHandler';
+import { useSetRecoilState } from 'recoil';
+import { modalState } from '../../recoilState';
+import { CardProps } from '../../types';
 import { FormCard } from '../FormCard';
+import { ColumnShifter } from '../ColumnShifter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheck, faDownload, faInbox, faLayerGroup, faPause, faPlay, faUserClock, faPenToSquare, faBan } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
-library.add(
-    faCheck,
-    faInbox,
-    faLayerGroup,
-    faPause,
-    faPlay,
-    faUserClock,
-    faDownload,
-    faPenToSquare,
-    faBan,
-);
 
 export function Card(props: CardProps) {
-    const [kanban, setKanban] = useRecoilState(kanbanState);
     const setModal = useSetRecoilState(modalState);
 
     return(
@@ -31,7 +18,7 @@ export function Card(props: CardProps) {
                     <h3>
                         {props.title}
                     </h3>
-                    <FontAwesomeIcon icon='pen-to-square' />
+                    <FontAwesomeIcon icon={faPenToSquare} />
                 </div>
                 <div className='card-description'>
                 {
@@ -43,16 +30,8 @@ export function Card(props: CardProps) {
                 }
                 </div>
             </div>
-            <div className='card-actions'>
-                {
-                    kanban.columns.filter(column => column.id != props.columnId)
-                    .map((column, index) => (
-                        <button key={index} title={column.title} className={`action-button icon-only small ${column.color ?? ''}`} onClick={() => changeColumn(column.id)}>
-                            {<FontAwesomeIcon icon={column.icon ?? 'layer-group'} />}
-                        </button>
-                    ))
-                }
-            </div>
+
+            <ColumnShifter cardId={props.id} columnId={props.columnId} />
         </div>
     );
 
@@ -62,41 +41,5 @@ export function Card(props: CardProps) {
             title: 'Alterar Card',
             children: <FormCard columnId={props.columnId} card={props} />,
         })
-    }
-
-    function changeColumn(goTo: string) {
-        const index = kanban.cards.findIndex((card) => card.id == props.id);
-        const cardToUpdate = kanban.cards[index];
-        const now = Date.now();
-        const newTimeTracker = {...cardToUpdate.timeTracker};
-        
-        if (!newTimeTracker[goTo]) {
-            newTimeTracker[goTo] = 0;
-        }
-
-        newTimeTracker[props.columnId] += (now - cardToUpdate.lastChange) / 1000;
-
-        const updatedCard = {
-            id: cardToUpdate.id,
-            title: cardToUpdate.title,
-            description: cardToUpdate.description,
-            order: cardToUpdate.order,
-            columnId: goTo,
-            creationDate: cardToUpdate.creationDate,
-            timeTracker: newTimeTracker,
-            lastChange: now,
-        }
-        
-        const newKanban: KanbanData = {
-            columns: kanban.columns,
-            cards: [
-                ...kanban.cards.slice(0, index),
-                updatedCard,
-                ...kanban.cards.slice(index + 1),
-            ],
-        }
-
-        setKanban(newKanban);
-        setKanbanData(newKanban);
     }
 }

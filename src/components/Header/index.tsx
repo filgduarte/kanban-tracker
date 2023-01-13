@@ -1,49 +1,32 @@
-import { useRecoilState } from 'recoil';
-import { kanbanState } from '../../recoilState';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { kanbanState, modalState } from '../../recoilState';
 import { setKanbanData } from '../../kanbanDataHandler';
 import { KanbanData, Column } from '../../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestion, faInfo, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
+import { faInfo, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
 import './style.css';
 
 export function Header() {
     const [kanban, setKanban] = useRecoilState(kanbanState);
-    const total = 5120;
-    let used = 0;
-    
-    for (let key in localStorage) {
-        if (localStorage.hasOwnProperty(key)) {
-            const amount = ((localStorage[key].length * 16) / (8 * 1024));
-            if (!isNaN(amount)) used += amount;
-        }
-    }
-    const storageUsePercentage = (used * 100) / total;
-
-    let storageStatus = '';
-    if (used < 1024) {
-        storageStatus = used.toFixed(2) + 'kb';
-    }
-    else {
-        storageStatus = (used / 1024).toFixed(2) + 'Mb';
-    }
-    storageStatus += ' / ' + (total / 1024).toFixed(2) + 'Mb';
+    const setModal = useSetRecoilState(modalState);
+    const storageStatus = getLocalStorageStatus();
     
     let storageUsedClassName = 'storage-used';
-    if (storageUsePercentage >= 75) {
-        storageUsedClassName += ' ' + ((storageUsePercentage >= 90) ? 'danger' : 'warning');
+    if (storageStatus.usePercentage >= 75) {
+        storageUsedClassName += ' ' + ((storageStatus.usePercentage >= 90) ? 'danger' : 'warning');
     }
 
-     return(
+    return(
         <header className='header'>
             <div className='tab'>Kanban Tracker</div>
             <div className='extra'>
                 <div className='storage-status'>
-                    <span>Storage use: {storageStatus}</span>
+                    <span>Storage use: {storageStatus.status}</span>
                     <div className='storage-total'>
                         <div className={storageUsedClassName}
                              style={
                                 {
-                                    width: storageUsePercentage.toFixed(2) + '%',
+                                    width: storageStatus.usePercentage.toFixed(2) + '%',
                                 }
                             }
                         >
@@ -53,30 +36,29 @@ export function Header() {
                 <nav className='main-nav'>
                     <ul className='menu'>
                         <li className='menu__item'>
-                            <a href='#' title='Sobre o Kanban Tracker'>
+                            <a href='#'
+                               title='Sobre o Kanban Tracker'
+                               onClick={e => openInfoModal(e)}
+                            >
                                 <FontAwesomeIcon icon={faInfo} />
                             </a>
                         </li>
                         <li className='menu__item'>
-                            <a href='#' title='Ajuda'>
-                                <FontAwesomeIcon icon={faQuestion} />
-                            </a>
-                        </li>
-                        <li className='menu__item'>
                             <a href='#'
+                               title='Mais opções'
                                onClick={
                                     e => {
                                         e.preventDefault();
                                         e.currentTarget.classList.toggle('open-submenu');
                                     }
                                 }
-                               title='Mais opções'
                             >
                                 <FontAwesomeIcon icon={faEllipsisV} />
                             </a>
                             <ul className='submenu'>
                                 <li className='submenu__item'>
                                     <a href='#'
+                                       title='Exportar dados'
                                        onClick={
                                             e => {
                                                 e.preventDefault();
@@ -92,7 +74,7 @@ export function Header() {
                                     </a>
                                 </li>
                                 <li className='submenu__item'>
-                                    <label htmlFor='import'>
+                                    <label htmlFor='import' title='Importar dados'>
                                     <input type='file'
                                            accept='.json'
                                            onChange={
@@ -113,6 +95,34 @@ export function Header() {
             </div>
         </header>
     );
+
+    function getLocalStorageStatus() {
+        const total = 5120;
+        let used = 0;
+        
+        for (let key in localStorage) {
+            if (localStorage.hasOwnProperty(key)) {
+                const amount = ((localStorage[key].length * 16) / (8 * 1024));
+                if (!isNaN(amount)) used += amount;
+            }
+        }
+
+        const storageUsePercentage = (used * 100) / total;
+        let storageStatus = '';
+
+        if (used < 1024) {
+            storageStatus = used.toFixed(2) + 'kb';
+        }
+        else {
+            storageStatus = (used / 1024).toFixed(2) + 'Mb';
+        }
+        storageStatus += ' / ' + (total / 1024).toFixed(2) + 'Mb';
+        
+        return {
+            status: storageStatus,
+            usePercentage: storageUsePercentage,
+        };
+    }
 
     function downloadFile(data: string, fileName: string, fileType: string) {
         const blob = new Blob([data], { type: fileType});
@@ -265,5 +275,13 @@ export function Header() {
         }
 
         return returnObject;
+    }
+
+    function openInfoModal(event: React.MouseEvent<HTMLAnchorElement>) {
+        setModal({
+            show: true,
+            title: 'Sobre o Kanban Tracker',
+            children: <p>Este projeto foi criado por <a href='https://filduarte.com.br' target='_blank'>Filipe Duarte</a> para organização pessoal de projetos.</p>,
+        })
     }
 }

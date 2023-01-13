@@ -61,3 +61,13 @@ export interface FormCardProps {
 export interface TimeTrackerProps {
     card: Card;
 }
+
+export interface ActionButtonProps {
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    type?: 'button' | 'submit' | 'reset';
+    label?: string;
+    icon?: IconProp;
+    title?: string;
+    className?: string;
+    key?: number | string;
+}
