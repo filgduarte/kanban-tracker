@@ -32,7 +32,7 @@ export interface Card {
 
 export interface CardProps extends Card {
     className?: string;
-    key: number;
+    key?: number;
     onClick?: () => void;
 }
 

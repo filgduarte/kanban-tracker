@@ -31,7 +31,15 @@ export function Card(props: CardProps) {
                 </div>
             </div>
 
-            <ColumnShifter cardId={props.id} columnId={props.columnId} />
+            <ColumnShifter id={props.id}
+                           title={props.title}
+                           description={props.description}
+                           order={props.order}
+                           columnId={props.columnId}
+                           creationDate={props.creationDate}
+                           timeTracker={props.timeTracker}
+                           lastChange={props.lastChange}
+            />
         </div>
     );
 

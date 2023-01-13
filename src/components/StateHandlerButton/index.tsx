@@ -10,15 +10,19 @@ interface StateHandlerButtonProps extends ActionButtonProps {
     preventDefault?: boolean;
     columnData?: Column;
     cardData?: Card;
+    ignoreConfirmation?: boolean;
 }
 
 interface Actions {
     [key: string]: () => boolean;
 }
 
-export function StateHandlerButton({onClick, action, preventDefault, columnData, cardData, ...rest}: StateHandlerButtonProps) {
+export function StateHandlerButton({onClick, action, preventDefault, columnData, cardData, ignoreConfirmation, ...rest}: StateHandlerButtonProps) {
     const [kanban, setKanban] = useRecoilState(kanbanState);
     const setModal = useSetRecoilState(modalState);
+    let updateKanban = true;
+    
+    const askForConfirmation = !ignoreConfirmation; // FOR READABILITY ONLY
 
     return(
         <ActionButton onClick={e => doAction(e)} {...rest} />
@@ -53,7 +57,9 @@ export function StateHandlerButton({onClick, action, preventDefault, columnData,
                     newKanban.columns.push(newColumn);
                 }
                 else {
-                    if (confirm('Tem certeza de que quer alterar essa coluna?') == false) {
+                    if (askForConfirmation && 
+                        confirm('Tem certeza de que quer alterar essa coluna?') == false
+                    ) {
                         return false;
                     }
 
@@ -117,7 +123,9 @@ export function StateHandlerButton({onClick, action, preventDefault, columnData,
                     newKanban.cards.push(newCard);
                 }
                 else {
-                    if (confirm('Tem certeza de que quer alterar esse card?') == false) {
+                    if (askForConfirmation && 
+                        confirm('Tem certeza de que quer alterar esse card?') == false
+                    ) {
                         return false;
                     }
                     
@@ -162,10 +170,13 @@ export function StateHandlerButton({onClick, action, preventDefault, columnData,
             },
 
             discardChanges: () => {
-                if (confirm('Tem certeza de que quer descartar as alterações?') == false) {
+                if (askForConfirmation && 
+                    confirm('Tem certeza de que quer descartar as alterações?') == false
+                ) {
                     return false;
                 }
 
+                updateKanban = false;
                 return true;
             },
         }
@@ -176,11 +187,11 @@ export function StateHandlerButton({onClick, action, preventDefault, columnData,
         };
 
         if ( stateActions[action]() ) {
-            if (action != 'discardChanges') {
+            if (updateKanban) {
                 setKanban(newKanban);
                 setKanbanData(newKanban);
             }
-
+            
             setModal({show: false});
         }
     }
