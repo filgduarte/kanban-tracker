@@ -44,3 +44,20 @@
 .card .card-content {
     padding: 4px;
 }
+
+.move-card-buttons {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin: 4px 4px;
+}
+
+.move-card-buttons .action-button {
+    background-color: var(--my-color);
+    box-shadow: 0 3px 0 rgba(0,0,0,.2),
+              0 3px 0 var(--my-color);
+}
+
+.move-card-buttons .action-button + .action-button {
+    margin-left: 4px;
+}

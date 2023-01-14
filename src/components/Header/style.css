@@ -82,6 +82,7 @@
     background-color: var(--color-background);
     border-radius: 2px;
     overflow: hidden;
+    z-index: 1;
 }
 
 .header .main-nav .menu__item a.open-submenu + .submenu {

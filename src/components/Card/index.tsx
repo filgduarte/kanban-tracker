@@ -1,14 +1,15 @@
-import { useSetRecoilState } from 'recoil';
-import { modalState } from '../../recoilState';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { kanbanState, modalState } from '../../recoilState';
 import { CardProps } from '../../types';
 import { FormCard } from '../FormCard';
-import { ColumnShifter } from '../ColumnShifter';
+import { StateHandlerButton } from '../StateHandlerButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 
 
 export function Card(props: CardProps) {
+    const kanban = useRecoilValue(kanbanState)
     const setModal = useSetRecoilState(modalState);
 
     return(
@@ -31,15 +32,22 @@ export function Card(props: CardProps) {
                 </div>
             </div>
 
-            <ColumnShifter id={props.id}
-                           title={props.title}
-                           description={props.description}
-                           order={props.order}
-                           columnId={props.columnId}
-                           creationDate={props.creationDate}
-                           timeTracker={props.timeTracker}
-                           lastChange={props.lastChange}
-            />
+            <div className='move-card-buttons'>
+            {
+                kanban.columns
+                .filter(column => column.id != props.columnId)
+                .map((column, index) => (
+                    <StateHandlerButton title={column.title}
+                                        action='saveCard'
+                                        cardData={{...props, columnId: column.id}}
+                                        ignoreConfirmation
+                                        className={`icon-only small ${column.color ?? ''}`}
+                                        icon={column.icon ?? faLayerGroup}
+                                        key={index}
+                    />
+                ))
+            }
+            </div>
         </div>
     );
 
