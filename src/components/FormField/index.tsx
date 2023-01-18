@@ -52,8 +52,8 @@ export function FormField(props: FormFieldProps) {
                               placeholder={props.placeholder}
                               required={props.required}
                               onChange={props.onChange}
+                              value={props.value}
                     >
-                        {props.value}
                     </textarea>
                 );
     

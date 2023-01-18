@@ -131,7 +131,8 @@ export function StateHandlerButton({onClick, action, preventDefault, columnData,
                     
                     const cardToUpdate = kanban.cards[index];
                     const newTimeTracker = {...cardToUpdate.timeTracker};
-                    newTimeTracker[cardData.columnId] += (now - cardToUpdate.lastChange) / 1000;
+                    const newColumnCurrentTracker = newTimeTracker[cardData.columnId] ?? 0;
+                    newTimeTracker[cardData.columnId] = newColumnCurrentTracker + ((now - cardToUpdate.lastChange) / 1000);
 
                     const updatedCard: Card = {
                         id: cardToUpdate.id,
