@@ -2,7 +2,7 @@ import { KanbanData, Card } from './types';
 import { nanoid } from 'nanoid';
 
 export const LOCAL_STORAGE_DEFAULT_KEY = 'kanbanTracker';
-export const LOCAL_STORAGE_ARCHIVE_KEY = 'kanbanArchive';
+
 const LOCAL_STORAGE_DEFAULT_VALUE:KanbanData = {
     'columns': [
         {

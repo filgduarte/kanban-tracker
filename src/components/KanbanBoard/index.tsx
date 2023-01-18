@@ -1,5 +1,5 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { kanbanState, modalState } from '../../recoilState';
+import { kanbanState, filteredKanbanState, modalState } from '../../recoilState';
 import { Column } from '../Column';
 import { Card } from '../Card';
 import { FormColumn } from '../FormColumn';
@@ -9,13 +9,14 @@ import './style.css';
 
 export function KanbanBoard() {
     const kanban = useRecoilValue(kanbanState);
+    const filteredKanban = useRecoilValue(filteredKanbanState);
     const setModal = useSetRecoilState(modalState);
     
     return(
         <main>
             <div className='kanban-board'>
             {
-                kanban.columns.map((column, index) => (
+                filteredKanban.columns.map((column, index) => (
                     <Column id={column.id}
                             title={column.title}
                             order={column.order}
@@ -25,8 +26,8 @@ export function KanbanBoard() {
                             key={index}
                     >
                     {
-                        kanban.cards.filter(card => card.columnId == column.id)
-                                    .map((card, index) => (
+                        filteredKanban.cards.filter(card => card.columnId == column.id)
+                                            .map((card, index) => (
                             <Card id={card.id}
                                   title={card.title}
                                   description={card.description}

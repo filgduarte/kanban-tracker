@@ -71,3 +71,11 @@ export interface ActionButtonProps {
     className?: string;
     key?: number | string;
 }
+
+export interface KanbanFilters {
+    [key: string]: string;
+}
+
+export interface KanbanFilterProps {
+    filters: KanbanFilters;
+}

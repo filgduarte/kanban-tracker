@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { kanbanState } from '../../recoilState';
 import { Column, FormColumnProps } from '../../types';
+import { FormField } from '../FormField';
 import { StateHandlerButton } from '../StateHandlerButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp, library } from '@fortawesome/fontawesome-svg-core';
@@ -60,21 +61,30 @@ export function FormColumn({column, className}: FormColumnProps) {
 
 return(
         <form className={'form ' + (className ?? '')}>
-            <div className='form-field full-width'>
-                <label htmlFor='title'>Título:</label>
-                <input type='text' id='title' name='title' value={columnData.title} onChange={onChangeHandler} />
-            </div>
+            <FormField type='text'
+                       name='title'
+                       label='Título:'
+                       value={columnData.title}
+                       className='full-width'
+                       onChange={onChangeHandler}
+                       required
+            />
             <div className='form-field'>
                 <fieldset>
                     <legend>Ícone:</legend>
                     {
                         iconOptions.map((currentIcon, index) => (
-                            <div className='input-icon' key={index}>
-                                <label htmlFor={`icon-${index}`}>
-                                    <FontAwesomeIcon icon={currentIcon} />
-                                </label>
-                                <input type='radio' id={`icon-${index}`} name='icon' value={currentIcon.toString()} checked={columnData.icon == currentIcon} onChange={onChangeHandler} />
-                            </div>
+                            <FormField type='radio'
+                                       name='icon'
+                                       label={<FontAwesomeIcon icon={currentIcon} />}
+                                       value={currentIcon.toString()}
+                                       id={`icon-${index}`}
+                                       className='input-icon'
+                                       checked={columnData.icon == currentIcon}
+                                       key={index}
+                                       onChange={onChangeHandler}
+                                       required
+                            />
                         ))
                     }
                 </fieldset>
@@ -84,30 +94,42 @@ return(
                     <legend>Cor:</legend>
                     {
                         colorOptions.map((currentColor, index) => (
-                            <div className='input-color' key={index}>
-                                <label htmlFor={currentColor} className={currentColor}>
-                                    {currentColor}
-                                </label>
-                                <input type='radio' id={currentColor} name='color' value={currentColor} checked={columnData.color == currentColor} key={index} onChange={onChangeHandler}></input>
-                            </div>
+                            <FormField type='radio'
+                                       name='color'
+                                       label={currentColor}
+                                       value={currentColor}
+                                       id={currentColor}
+                                       className={`input-color ${currentColor}`}
+                                       checked={columnData.color == currentColor}
+                                       key={index}
+                                       onChange={onChangeHandler}
+                                       required
+                            />
                         ))
                     }
                 </fieldset>
             </div>
-            <div className='form-field'>
-                <label htmlFor='order'>Ordem:</label>
-                <input id='order' name='order' type='number' value={columnData.order} onChange={onChangeHandler}></input>
-            </div>
-            <div className='form-field'>
-                <label htmlFor='archive'>Arquivar cards:</label>
-                <select id='archive-after' name='archiveAfter' defaultValue={columnData.archiveAfter} onChange={onChangeHandler}>
-                    {
-                        Object.entries(archiveOptions).map(([caption, seconds], index) => (
-                            <option key={index} value={seconds}>{caption}</option>
-                        ))
-                    }
-                </select>
-            </div>
+            <FormField type='number'
+                       name='order'
+                       label='Ordem:'
+                       value={columnData.order}
+                       onChange={onChangeHandler}
+            />
+            <FormField type='select'
+                       name='archiveAfter'
+                       label='Arquivar cards:'
+                       value={columnData.archiveAfter}
+                       id='archive-after'
+                       defaultValue={columnData.archiveAfter}
+                       onChange={onChangeHandler}
+                       required
+            >
+                {
+                    Object.entries(archiveOptions).map(([caption, seconds], index) => (
+                        <option key={index} value={seconds}>{caption}</option>
+                    ))
+                }
+            </FormField>
             <div className='form-field form-actions full-width'>
             {
             (kanban.columns.length > 1 && column?.id)  &&

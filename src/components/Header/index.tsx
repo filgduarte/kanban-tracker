@@ -2,6 +2,8 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { kanbanState, modalState } from '../../recoilState';
 import { setKanbanData } from '../../kanbanDataHandler';
 import { KanbanData, Column } from '../../types';
+import { StorageStatus } from '../StorageStatus';
+import { KanbanFilter } from '../KanbanFilter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfo, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
 import './style.css';
@@ -9,30 +11,15 @@ import './style.css';
 export function Header() {
     const [kanban, setKanban] = useRecoilState(kanbanState);
     const setModal = useSetRecoilState(modalState);
-    const storageStatus = getLocalStorageStatus();
-    
-    let storageUsedClassName = 'storage-used';
-    if (storageStatus.usePercentage >= 75) {
-        storageUsedClassName += ' ' + ((storageStatus.usePercentage >= 90) ? 'danger' : 'warning');
-    }
 
     return(
         <header className='header'>
-            <div className='tab'>Kanban Tracker</div>
+            <KanbanFilter filters={{
+                Ativos: 'Show Active',
+                Arquivo: 'Show Archived',
+            }}/>
             <div className='extra'>
-                <div className='storage-status'>
-                    <span>Storage use: {storageStatus.status}</span>
-                    <div className='storage-total'>
-                        <div className={storageUsedClassName}
-                             style={
-                                {
-                                    width: storageStatus.usePercentage.toFixed(2) + '%',
-                                }
-                            }
-                        >
-                        </div>
-                    </div>
-                </div>
+                <StorageStatus />
                 <nav className='main-nav'>
                     <ul className='menu'>
                         <li className='menu__item'>
@@ -95,34 +82,6 @@ export function Header() {
             </div>
         </header>
     );
-
-    function getLocalStorageStatus() {
-        const total = 5120;
-        let used = 0;
-        
-        for (let key in localStorage) {
-            if (localStorage.hasOwnProperty(key)) {
-                const amount = ((localStorage[key].length * 16) / (8 * 1024));
-                if (!isNaN(amount)) used += amount;
-            }
-        }
-
-        const storageUsePercentage = (used * 100) / total;
-        let storageStatus = '';
-
-        if (used < 1024) {
-            storageStatus = used.toFixed(2) + 'kb';
-        }
-        else {
-            storageStatus = (used / 1024).toFixed(2) + 'Mb';
-        }
-        storageStatus += ' / ' + (total / 1024).toFixed(2) + 'Mb';
-        
-        return {
-            status: storageStatus,
-            usePercentage: storageUsePercentage,
-        };
-    }
 
     function downloadFile(data: string, fileName: string, fileType: string) {
         const blob = new Blob([data], { type: fileType});
@@ -283,5 +242,5 @@ export function Header() {
             title: 'Sobre o Kanban Tracker',
             children: <p>Este projeto foi criado por <a href='https://filduarte.com.br' target='_blank'>Filipe Duarte</a> para organização pessoal de projetos.</p>,
         })
-    }
+    }   
 }

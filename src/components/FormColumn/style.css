@@ -7,37 +7,6 @@
     max-width: 470px;
 }
 
-.form-field {
-    width: calc(50% - 12px);
-}
-
-.form-field.full-width {
-    width: 100%;
-}
-
-.form-field label,
-.form-field legend {
-    display: block;
-    font-size: 0.875rem;
-    color: var(--color-primary);
-}
-
-.form-field input,
-.form-field select {
-    width: 100%;
-    height: 36px;
-    padding: 0 8px;
-    background: var(--color-primary-light);
-    border: none;
-    border-radius: 2px;
-}
-
-fieldset {
-    display: flex;
-    border: none;
-    padding: 0;
-}
-
 .form-field .input-icon label,
 .form-field .input-color label {
     display: flex;

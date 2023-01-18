@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Card, FormCardProps } from '../../types';
+import { FormField } from '../FormField';
 import { StateHandlerButton } from '../StateHandlerButton';
 import { TimeTrackers } from '../TimeTrackers';
 import { faCheck, faTimes, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import './style.css';
 
 export function FormCard({columnId, card, className}: FormCardProps) {
     const [cardData, setCardData] = useState<Card>({
@@ -24,14 +24,22 @@ export function FormCard({columnId, card, className}: FormCardProps) {
 
     return(
         <form className={formClassName}>
-            <div className='form-field full-width'>
-                <label htmlFor='title'>Título:</label>
-                <input type='text' id='title' name='title' value={cardData.title} onChange={onChangeHandler} />
-            </div>
-            <div className='form-field full-width'>
-                <label htmlFor='description'>Descrição:</label>
-                <textarea id='description' name='description' value={cardData.description} onChange={onChangeHandler}></textarea>
-            </div>
+            <FormField type='text'
+                       name='title'
+                       label='Título:'
+                       value={cardData.title}
+                       className='full-width'
+                       onChange={onChangeHandler}
+                       required
+            />
+            <FormField type='textarea'
+                       name='description'
+                       label='Descrição:'
+                       value={cardData.description}
+                       className='full-width'
+                       onChange={onChangeHandler}
+            />
+
             {
                 (card) &&
                  <TimeTrackers card={card} />
@@ -63,7 +71,7 @@ export function FormCard({columnId, card, className}: FormCardProps) {
         </form>
     );
 
-    function onChangeHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    function onChangeHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
         setCardData(previous => ({
             ...previous,
             [e.target.name]: e.target.value,

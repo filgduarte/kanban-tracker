@@ -5,44 +5,11 @@
     background-color: var(--color-primary-light);
 }
 
-.header .tab {
-    display: flex;
-    padding: 16px;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.125rem;
-    font-weight: bold;
-    background-color: var(--color-background);
-    border-radius: 2px 2px 0 0;
-}
-
 .header .extra {
     display: flex;
     align-items: center;
     margin-left: auto;
     padding-bottom: 8px;
-}
-
-.header .storage-status {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-right: 8px;
-    height: 24px;
-    font-size: 0.75rem;
-    color: var(--color-primary-dark)
-}
-
-.header .storage-status .storage-total {
-    height: 11px;
-    background-color: var(--color-primary);
-    border-radius: 2px;
-}
-
-.header .storage-status .storage-used {
-    --my-color: var(--color-primary-dark);
-    height: 100%;
-    background-color: var(--my-color);
 }
 
 .header .main-nav .menu {

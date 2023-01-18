@@ -1,0 +1,21 @@
+.storage-status {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 8px;
+    height: 24px;
+    font-size: 0.75rem;
+    color: var(--color-primary-dark)
+}
+
+.storage-status .storage-total {
+    height: 11px;
+    background-color: var(--color-primary);
+    border-radius: 2px;
+}
+
+.storage-status .storage-used {
+    --my-color: var(--color-primary-dark);
+    height: 100%;
+    background-color: var(--my-color);
+}
