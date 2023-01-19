@@ -31,7 +31,7 @@
     text-decoration: underline;
 }
 
-.kanban-filter .tab:has(:checked) label {
+.kanban-filter .tab .checked label {
     background-color: var(--color-background);
 }
 

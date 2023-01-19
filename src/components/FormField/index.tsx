@@ -19,9 +19,16 @@ interface FormFieldProps {
 
 export function FormField(props: FormFieldProps) {
     const fieldId = props.id ?? props.name;
+    let className = 'form-field';
+    if (props.className) {
+        className += ` ${props.className}`;
+    }
+    if (props.checked) {
+        className += ' checked';
+    }
 
     return(
-        <div className={'form-field ' + (props.className ?? '')}>
+        <div className={className}>
                 <label htmlFor={fieldId}>
                     {props.label}
                 </label>

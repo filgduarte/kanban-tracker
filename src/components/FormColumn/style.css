@@ -20,8 +20,8 @@
     cursor: pointer;
 }
 
-.form-field .input-icon:has(:checked) label,
-.form-field .input-color:has(:checked) label {
+.form-field .input-icon.checked label,
+.form-field .input-color.checked label {
     background-color: var(--color-primary-light);
 }
 
