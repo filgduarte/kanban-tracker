@@ -10,7 +10,7 @@ export function StorageStatus() {
 
     return (
         <div className='storage-status'>
-            <span>Storage use: {storageStatus.status}</span>
+            <span>Storage use: <span>{storageStatus.status}</span></span>
             <div className='storage-total'>
                 <div className={storageUsedClassName}
                         style={

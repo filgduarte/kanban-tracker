@@ -1,10 +1,9 @@
-.form.edit-card {
-    max-width: 600px;
+.time-trackers {
+    width: 100%;
 }
 
 .time-tracker {
     display: flex;
-    width: 100%;
     gap: 16px;
 }
 
@@ -41,14 +40,38 @@
 }
 
 .time-tracker__chart {
-    height: 100%;
+    position: relative;
     flex-grow: 1;
+    margin-top: 16px;
 }
 
-.time-tracker__chart .donut-chart {
+.time-tracker__chart-label {
+    position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
+    gap: 8px;
+    padding: 8px;
+    color: var(--color-background);
+}
+
+.time-tracker__chart-label > * {
+    width: 100%;
+}
+
+.time-tracker__chart-label h4 {
+    text-align: right;
+}
+
+.time-tracker__chart-data {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.time-tracker__chart-data .bar-chart__bar {
+    background-color: var(--my-color);
 }

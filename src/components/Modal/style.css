@@ -38,6 +38,7 @@
 
 .modal__box {
     position: relative;
+    max-width: calc(100vw - 32px);
     background-color: var(--color-background);
     border-radius: 2px;
     transform: scale(.75);

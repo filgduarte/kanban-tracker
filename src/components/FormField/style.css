@@ -1,5 +1,7 @@
-.form-field {
-    width: calc(50% - 12px);
+@media screen and (min-width: 560px) {
+    .form-field {
+        width: calc(50% - 12px);
+    }
 }
 
 .form-field.full-width {
