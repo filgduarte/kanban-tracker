@@ -1,10 +1,10 @@
 @media screen and (min-width: 560px) {
-    .form-field {
+    .form-field.half-width {
         width: calc(50% - 12px);
     }
 }
 
-.form-field.full-width {
+.form-field {
     width: 100%;
 }
 
@@ -34,6 +34,7 @@
 
 fieldset {
     display: flex;
+    justify-content: space-between;
     border: none;
     padding: 0;
 }

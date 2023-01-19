@@ -65,11 +65,10 @@ return(
                        name='title'
                        label='Título:'
                        value={columnData.title}
-                       className='full-width'
                        onChange={onChangeHandler}
                        required
             />
-            <div className='form-field'>
+            <div className='form-field half-width'>
                 <fieldset>
                     <legend>Ícone:</legend>
                     {
@@ -89,7 +88,7 @@ return(
                     }
                 </fieldset>
             </div>
-            <div className='form-field'>
+            <div className='form-field half-width'>
                 <fieldset>
                     <legend>Cor:</legend>
                     {
@@ -109,7 +108,7 @@ return(
                     }
                 </fieldset>
             </div>
-            <FormField type='number'
+            <FormField type='hidden'
                        name='order'
                        label='Ordem:'
                        value={columnData.order}
@@ -120,6 +119,7 @@ return(
                        label='Arquivar cards:'
                        value={columnData.archiveAfter}
                        id='archive-after'
+                       className='half-width'
                        defaultValue={columnData.archiveAfter}
                        onChange={onChangeHandler}
                        required
@@ -130,7 +130,7 @@ return(
                     ))
                 }
             </FormField>
-            <div className='form-field form-actions full-width'>
+            <div className='form-field form-actions'>
             {
             (kanban.columns.length > 1 && column?.id)  &&
                 <StateHandlerButton label='Excluir'

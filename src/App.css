@@ -96,3 +96,7 @@ body {
 .danger {
   --my-color: var(--color-danger);
 }
+
+.hidden {
+  display: none;
+}

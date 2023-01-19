@@ -26,6 +26,9 @@ export function FormField(props: FormFieldProps) {
     if (props.checked) {
         className += ' checked';
     }
+    if (props.type == 'hidden') {
+        className += ' hidden'
+    }
 
     return(
         <div className={className}>

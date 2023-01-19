@@ -28,7 +28,6 @@ export function FormCard({columnId, card, className}: FormCardProps) {
                        name='title'
                        label='Título:'
                        value={cardData.title}
-                       className='full-width'
                        onChange={onChangeHandler}
                        required
             />
@@ -36,7 +35,6 @@ export function FormCard({columnId, card, className}: FormCardProps) {
                        name='description'
                        label='Descrição:'
                        value={cardData.description}
-                       className='full-width'
                        onChange={onChangeHandler}
             />
 
